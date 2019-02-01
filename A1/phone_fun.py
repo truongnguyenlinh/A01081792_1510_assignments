@@ -17,7 +17,10 @@ def number_translator():
         print("Please re-enter a phone number in format XXX-XXX-XXXX.")
     else:
         map_letters_numbers = number_entered.maketrans(letters, numbers_index)
+        # Maketrans built-in maps letters to numbers_index.
+        # Strings must be of equal length in order to map.
         return number_entered.translate(map_letters_numbers)
+        # Translate returns the number_index mapped to letters.
 
 
 def main():
@@ -26,3 +29,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

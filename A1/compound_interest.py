@@ -22,12 +22,13 @@ def compound_interest(principle, annual_interest_r, n_years_comp, years):
     >>> compound_interest(0.0, 1.0, 1, 0)
     0.0
     """
-
     total_money = float(principle) * ((1 + float(annual_interest_r) / int(n_years_comp)) ** (int(n_years_comp*years)))
-    return round(total_money, 4)
+    return total_money
+
 
 def main():
     doctest.testmod()
+
 
 if __name__ == '__main__':
     main()

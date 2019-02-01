@@ -16,38 +16,30 @@ def time_calculator(seconds):
     >>> time_calculator(99999)
     [1, 3, 46, 39]
     >>> time_calculator(7823)
-    [2, 10, 23]
+    [0, 2, 10, 23]
     >>> time_calculator(1)
-    [1]
+    [0, 0, 0, 1]
     """
-    days = 86400
-    hours = 3600
-    minutes = 60
-    sec = 1
+    days = 0
+    hours = 0
+    minutes = 0
 
     if not seconds > 0:
-        raise ValueError("Number given is not a positive.")
+        return "Number given is not a positive."
 
-    time_convert = []
+    if seconds >= 86400:
+        days = seconds // 86400
+        seconds = seconds % 86400
 
-    if seconds >= days:
-        seconds_to_days = seconds // days
-        time_convert.append(seconds_to_days)
-        seconds = seconds % days
+    if seconds >= 3600:
+        hours = seconds // 3600
+        seconds = seconds % 3600
 
-    if seconds >= hours:
-        seconds_to_hours = seconds // hours
-        time_convert.append(seconds_to_hours)
-        seconds = seconds % hours
+    if seconds >= 60:
+        minutes = seconds // 60
+        seconds = seconds % 60
 
-    if seconds >= minutes:
-        seconds_to_min = seconds // minutes
-        time_convert.append(seconds_to_min)
-        seconds = seconds % minutes
-
-    if seconds >= sec:
-        sec_only = seconds // sec
-        time_convert.append(sec_only)
+    time_convert = [days, hours, minutes, seconds]
 
     return time_convert
 

@@ -19,7 +19,7 @@ def convert_to_roman_numeral(positive_int):
     'MMMMMMMMMCMXCIX'
     """
 
-    if not (10000 > positive_int) and (positive_int > 0):
+    if not (10000 >= positive_int) and (positive_int > 0):
         return "The value entered is not between 0 and 10001."
     else:
         roman_m = (positive_int // 1000) * "M"
@@ -67,9 +67,6 @@ def convert_to_roman_numeral(positive_int):
 
 def main():
     doctest.testmod()
-    # print(convert_to_roman_numeral(10001))
-    # print(convert_to_roman_numeral(72))
-    # print(convert_to_roman_numeral(9784))
 
 
 if __name__ == '__main__':

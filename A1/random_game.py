@@ -8,7 +8,7 @@ import random
 
 def rock_paper_scissors():
     """
-    Generate a game of rock, paper or scissors with the computer..
+    Generate a game of rock, paper or scissors with the computer.
     """
 
     random_num = random.randint(0, 2)
@@ -38,3 +38,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
