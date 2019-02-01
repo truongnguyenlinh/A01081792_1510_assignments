@@ -12,12 +12,7 @@ class TestNumberGenerator(TestCase):
         self.assertEqual(6, len(lotto.number_generator()))
 
     def test_number_generator_integer_true(self):
-        self.assertTrue(type(lotto.number_generator()[0]) is int)
-        self.assertTrue(type(lotto.number_generator()[1]) is int)
-        self.assertTrue(type(lotto.number_generator()[2]) is int)
-        self.assertTrue(type(lotto.number_generator()[3]) is int)
-        self.assertTrue(type(lotto.number_generator()[4]) is int)
-        self.assertTrue(type(lotto.number_generator()[5]) is int)
+        self.assertEqual(int, type(sum(lotto.number_generator())))
 
     def test_number_generator_range(self):
         my_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
@@ -57,3 +52,14 @@ class TestNumberGenerator(TestCase):
         self.assertTrue(1, lotto_number.count(lotto_five))
         self.assertTrue(1, lotto_number.count(lotto_six))
 
+    def test_number_generator_sorted(self):
+        lotto_number = lotto.number_generator()
+
+        self.assertTrue(lotto_number[0] < lotto_number[1])
+        self.assertTrue(lotto_number[1] < lotto_number[2])
+        self.assertTrue(lotto_number[2] < lotto_number[3])
+        self.assertTrue(lotto_number[3] < lotto_number[4])
+        self.assertTrue(lotto_number[4] < lotto_number[5])
+
+    def test_number_generator_list(self):
+        self.assertTrue(type(lotto.number_generator() is list))
