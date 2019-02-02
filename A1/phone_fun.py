@@ -24,6 +24,7 @@ def number_translator():
 
 
 def main():
+    """Execute the program."""
     print(number_translator())
 
 

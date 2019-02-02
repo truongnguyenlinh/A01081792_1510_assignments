@@ -33,6 +33,7 @@ def colour_mixer():
 
 
 def main():
+    """Execute the program."""
     colour_mixer()
 
 

@@ -66,6 +66,7 @@ def convert_to_roman_numeral(positive_int):
 
 
 def main():
+    """Execute the program."""
     doctest.testmod()
 
 

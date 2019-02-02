@@ -4,7 +4,7 @@
 
 
 from unittest import TestCase
-from A1 import compound_interest
+import compound_interest
 
 
 class TestCompoundInterest(TestCase):

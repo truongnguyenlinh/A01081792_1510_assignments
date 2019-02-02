@@ -4,7 +4,7 @@
 
 
 from unittest import TestCase
-from A1 import time_calculator
+import time_calculator
 
 
 class TestTimeCalculator(TestCase):

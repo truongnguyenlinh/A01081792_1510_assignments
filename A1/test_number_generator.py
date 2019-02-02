@@ -4,7 +4,7 @@
 
 
 from unittest import TestCase
-from A1 import lotto
+import lotto
 
 
 class TestNumberGenerator(TestCase):
@@ -63,3 +63,4 @@ class TestNumberGenerator(TestCase):
 
     def test_number_generator_list(self):
         self.assertTrue(type(lotto.number_generator() is list))
+

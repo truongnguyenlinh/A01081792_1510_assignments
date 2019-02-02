@@ -45,6 +45,7 @@ def time_calculator(seconds):
 
 
 def main():
+    """Execute the program."""
     doctest.testmod()
 
 

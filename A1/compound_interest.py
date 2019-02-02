@@ -18,9 +18,9 @@ def compound_interest(principle, annual_interest_r, n_years_comp, years):
     PRECONDITION: years_comp must be an integer
     PRECONDITION: years must be an integer
     >>> compound_interest(6078.0, 0.10, 7, 8)
-    13450.4862
-    >>> compound_interest(0.0, 1.0, 1, 0)
-    0.0
+    13450.486199337889
+    >>> compound_interest(70.4, 1.0, 1, 0)
+    70.4
     """
     total_money = float(principle) * ((1 + float(annual_interest_r) / int(n_years_comp)) ** (int(n_years_comp*years)))
     return total_money

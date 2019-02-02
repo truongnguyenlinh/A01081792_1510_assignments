@@ -23,6 +23,7 @@ def number_generator():
 
 
 def main():
+    """Execute the program."""
     print(number_generator())
 
 
