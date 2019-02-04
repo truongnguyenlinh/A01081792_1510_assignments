@@ -9,12 +9,15 @@ import lotto
 
 class TestNumberGenerator(TestCase):
     def test_number_generator_length(self):
+        """Produce ength of list to determine whether there are six elements."""
         self.assertEqual(6, len(lotto.number_generator()))
 
     def test_number_generator_integer_true(self):
+        "Produce type to determine if all elements in list can be summed together."
         self.assertEqual(int, type(sum(lotto.number_generator())))
 
     def test_number_generator_range(self):
+        """Produce True to determine if element in list is within range."""
         my_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
                    11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
                    21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
@@ -36,6 +39,7 @@ class TestNumberGenerator(TestCase):
         self.assertTrue(lotto_six in my_list)
 
     def test_number_generator_unique(self):
+        """Produce True to determine whether element only appears once in list."""
         lotto_number = lotto.number_generator()
 
         lotto_one = lotto.number_generator()[0]
@@ -53,6 +57,7 @@ class TestNumberGenerator(TestCase):
         self.assertTrue(1, lotto_number.count(lotto_six))
 
     def test_number_generator_sorted(self):
+        """Produce True to determine if the next element is greater than the first."""
         lotto_number = lotto.number_generator()
 
         self.assertTrue(lotto_number[0] < lotto_number[1])
@@ -62,5 +67,6 @@ class TestNumberGenerator(TestCase):
         self.assertTrue(lotto_number[4] < lotto_number[5])
 
     def test_number_generator_list(self):
+        """Produce True if type returned is a list."""
         self.assertTrue(type(lotto.number_generator() is list))
 
