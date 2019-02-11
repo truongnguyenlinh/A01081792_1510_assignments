@@ -56,7 +56,7 @@ def generate_name(syllables):
     RETURN string composed of specified number of syllables
     """
     name = ""
-    for i in range(syllables):
+    for num in range(syllables):
         name += generate_syllables()
     return name
 
@@ -88,13 +88,18 @@ def choose_inventory(inventory, selection):
 
 
 def class_list():
-    """Provide out a list of classes for user to choose from and print the users choice.
+    """Provide a dictionary of classes with roll die for user to choose from.
+
+    RETURN dictionary of all classes and values
     """
-    classes = {"barbarian": 12, "bard": 8, "cleric": 8, "druid": 8, "fighter": 10, "monk": 8, "paladin": 10,
-               "ranger": 10, "rogue": 8, "sorcerer": 6, "warlock": 8, "wizard": 6, "blood hunter": 10}
+    return {"barbarian": 12, "bard": 8, "cleric": 8, "druid": 8, "fighter": 10, "monk": 8, "paladin": 10,
+            "ranger": 10, "rogue": 8, "sorcerer": 6, "warlock": 8, "wizard": 6, "blood hunter": 10}
+
+
+def class_selection():
     class_input = str(input("Select one of the following classes: Barbarian, Bard, Cleric, Druid, \n"
                             "Monk, Paladin, Ranger, Rogue, Sorcerer, Warlock, Wizard, Blood Hunter")).strip().lower()
-    if class_input not in classes.keys():
+    if class_input not in class_list().keys():
         print("Error: please select from classes provided")
         return None
     else:
@@ -110,19 +115,18 @@ def create_character(syllable):
     """
     # items = ["armor", "shield", "consumables", "weapons",
     #          "gear", "tools", "wands", "gold"]
-    attribute = ['Strength', 'Dexterity', 'Constitution',
-                 'Intelligence', 'Wisdom', 'Charisma']
+
     character = {"Name": generate_name(syllable)}
 
-    strength = {attribute[0]: roll_die(3, 6)}
-    dexterity = {attribute[1]: roll_die(3, 6)}
-    constitution = {attribute[2]: roll_die(3, 6)}
-    intelligence = {attribute[3]: roll_die(3, 6)}
-    wisdom = {attribute[4]: roll_die(3, 6)}
-    charisma = {attribute[5]: roll_die(3, 6)}
+    strength = {'Strength': roll_die(3, 6)}
+    dexterity = {'Dexterity': roll_die(3, 6)}
+    constitution = {'Constitution': roll_die(3, 6)}
+    intelligence = {'Intelligence': roll_die(3, 6)}
+    wisdom = {'Wisdom': roll_die(3, 6)}
+    charisma = {'Charisma': roll_die(3, 6)}
 
-    character.update({"Class": class_list()})
-    character.update({"HP": 0})
+    character.update({"Class": class_selection()})
+    character.update({"HP": random.randint(1, class_list()[character['Class']])})
     character.update(strength)
     character.update(dexterity)
     character.update(constitution)
