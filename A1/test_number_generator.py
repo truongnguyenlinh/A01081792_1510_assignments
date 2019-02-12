@@ -9,7 +9,7 @@ import lotto
 
 class TestNumberGenerator(TestCase):
     def test_number_generator_length(self):
-        """Produce ength of list to determine whether there are six elements."""
+        """Produce length of list to determine whether there are six elements."""
         self.assertEqual(6, len(lotto.number_generator()))
 
     def test_number_generator_integer_true(self):

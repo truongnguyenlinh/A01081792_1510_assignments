@@ -14,6 +14,7 @@ def roll_die(number_of_rolls, number_of_sides):
     PARAM number_of_sides is an int
     PRECONDITION number_of_rolls is a positive int
     PRECONDITION number_of_sides is a positive int
+    RETURN total value from number of rolls and sided die
     """
     total = random.randint(1 * number_of_rolls, number_of_sides * number_of_rolls)
 
@@ -26,7 +27,7 @@ def roll_die(number_of_rolls, number_of_sides):
 def generate_vowel():
     """Return a randomly selected vowel letter.
 
-    RETURN random vowel from vowel letters"""
+    RETURN random string vowel from vowel letters"""
     vowel_letters = 'aeiouy'
     return random.choice(vowel_letters)
 
@@ -34,7 +35,7 @@ def generate_vowel():
 def generate_consonant():
     """Return a randomly selected consonant letter.
 
-    RETURN random vowel from consonant letters
+    RETURN random string consonant from consonant letters
     """
     consonant_letters = 'bcdfghjklmnpqrstvwxyz'
     return random.choice(consonant_letters)
@@ -62,13 +63,13 @@ def generate_name(syllables):
 
 
 def choose_inventory(inventory, selection):
-    """Return a sorted list of random elements in a list.
+    """Return a sorted list of random elements in a dictionary.
 
     PARAM inventory is a list
     PARAM selection is an int
     PRECONDITION inventory must be a list
     PRECONDITION selection must be a positive integer
-    RETURN sorted list
+    RETURN sorted dictionary of selected length for inventory
     """
     items = ["Armor", "Shield", "Consumables", "Weapons",
              "Gear", "Tools", "Wands", "Gold"]
@@ -90,36 +91,33 @@ def choose_inventory(inventory, selection):
 def class_list():
     """Provide a dictionary of classes with roll die for user to choose from.
 
-    RETURN dictionary of all classes and values
+    RETURN dictionary of all classes (keys) and values
     """
     return {"barbarian": 12, "bard": 8, "cleric": 8, "druid": 8, "fighter": 10, "monk": 8, "paladin": 10,
             "ranger": 10, "rogue": 8, "sorcerer": 6, "warlock": 8, "wizard": 6, "blood hunter": 10}
 
 
 def class_selection():
-    """Gather class input from user from class_list dictionary.
+    """Obtain class input from user from class_list dictionary.
 
-    RETURN class string if input is in dictionary keys
+    RETURN class string, if input is in dictionary keys
     """
     class_input = str(input("Select one of the following classes: Barbarian, Bard, Cleric, Druid, \n"
                             "Monk, Paladin, Ranger, Rogue, Sorcerer, Warlock, Wizard, Blood Hunter")).strip().lower()
     if class_input not in class_list().keys():
         print("Error: please select from classes provided")
-        return None
+        return class_selection()
     else:
         return class_input
 
 
 def create_character(syllable):
-    """Return name, with given syllables.
+    """Return character with its name, six attributes, HP, XP and inventory.
 
     PARAM syllables is an int
     PRECONDITION syllables is a positive, non-zero integer
-    RETURN string with syllable number
+    RETURN merged dictionary of name, attributes, HP, XP and inventory
     """
-    # items = ["armor", "shield", "consumables", "weapons",
-    #          "gear", "tools", "wands", "gold"]
-
     character = {"Name": generate_name(syllable)}
 
     strength = {'Strength': roll_die(3, 6)}
@@ -160,7 +158,6 @@ def combat_round(opponent_one, opponent_two):
 
     if opponent_one_roll == opponent_two_roll:
         combat_round(opponent_one, opponent_two)
-        print("Both opponents missed!")
         return None
 
     if opponent_one_roll > opponent_two_roll:
@@ -173,15 +170,22 @@ def combat_round(opponent_one, opponent_two):
     if random.randint(1, 20) > victim['Dexterity']:
         damage = random.randint(1, random.randint(1, class_list()[attacker['Class']]))
         victim['HP'] -= damage
-        print(attacker['Name'], "hit", victim['Name'], "a total of", damage, "and",
+        print(attacker['Name'], "(attacker) hit", victim['Name'], "a total of", damage, "and",
               victim['Name'], "now has HP of", victim['HP'])
-        return None
+        if victim['HP'] <= 0:
+            print(victim['Name'], "has died")
     else:
+        print(attacker['Name'], "missed,", victim['Name'], "has a total of '%d' HP" % victim['HP'])
+
+    if random.randint(1, 20) > attacker['Dexterity']:
         damage = random.randint(1, random.randint(1, class_list()[victim['Class']]))
         attacker['HP'] -= damage
-        print(victim['Name'], "hit", attacker['Name'], "a total of", damage, "and",
+        print(victim['Name'], "(victim) hit", attacker['Name'], "a total of", damage, "damage and",
               attacker['Name'], "now has HP of", attacker['HP'])
-        return None
+        if attacker['HP'] <= 0:
+            print(attacker['Name'], "has died")
+    else:
+        print(victim['Name'], "missed,", attacker['Name'], "has a total of '%d' HP" % attacker['HP'])
 
 
 def print_character(character):
@@ -195,11 +199,20 @@ def print_character(character):
 
 
 def main():
+    """Execute the program."""
+    print(roll_die(2, 8))
+
+    items = ["armor", "shield", "consumables", "weapons",
+             "gear", "tools", "wands", "gold"]
+    print(choose_inventory(items, 3))
+
     opponent_one = create_character(4)
     opponent_two = create_character(3)
     print_character(opponent_one)
     print_character(opponent_two)
-    combat_round(opponent_one, opponent_two)
+
+    while opponent_one['HP'] > 0 and opponent_two['HP'] > 0:
+        combat_round(opponent_one, opponent_two)
 
 
 if __name__ == '__main__':
