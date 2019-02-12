@@ -58,7 +58,7 @@ def generate_name(syllables):
     name = ""
     for num in range(syllables):
         name += generate_syllables()
-    return name
+    return name.title()
 
 
 def choose_inventory(inventory, selection):
@@ -97,6 +97,10 @@ def class_list():
 
 
 def class_selection():
+    """Gather class input from user from class_list dictionary.
+
+    RETURN class string if input is in dictionary keys
+    """
     class_input = str(input("Select one of the following classes: Barbarian, Bard, Cleric, Druid, \n"
                             "Monk, Paladin, Ranger, Rogue, Sorcerer, Warlock, Wizard, Blood Hunter")).strip().lower()
     if class_input not in class_list().keys():
@@ -143,14 +147,61 @@ def create_character(syllable):
         return character
 
 
+def combat_round(opponent_one, opponent_two):
+    """Produce a single round of combat between two characters.
+
+    PARAM opponent_one: a dictionary
+    PARAM opponent_two: a dictionary
+    PRECONDITION opponent_one: must be a well-formed dictionary with correct character
+    PRECONDITION opponent_two: must be a well-formed dictionary with correct character
+    """
+    opponent_one_roll = random.randint(1, 20)
+    opponent_two_roll = random.randint(1, 20)
+
+    if opponent_one_roll == opponent_two_roll:
+        combat_round(opponent_one, opponent_two)
+        print("Both opponents missed!")
+        return None
+
+    if opponent_one_roll > opponent_two_roll:
+        attacker = opponent_one
+        victim = opponent_two
+    else:
+        attacker = opponent_two
+        victim = opponent_one
+
+    if random.randint(1, 20) > victim['Dexterity']:
+        damage = random.randint(1, random.randint(1, class_list()[attacker['Class']]))
+        victim['HP'] -= damage
+        print(attacker['Name'], "hit", victim['Name'], "a total of", damage, "and",
+              victim['Name'], "now has HP of", victim['HP'])
+        return None
+    else:
+        damage = random.randint(1, random.randint(1, class_list()[victim['Class']]))
+        attacker['HP'] -= damage
+        print(victim['Name'], "hit", attacker['Name'], "a total of", damage, "and",
+              attacker['Name'], "now has HP of", attacker['HP'])
+        return None
+
+
 def print_character(character):
     """Print a character with its attributes and name.
 
-    PARAM character: is a list
-    PRECONDITION character: is a list formatted as seen in create_character function
+    PARAM character: is a dictionary
+    PRECONDITION character: is a dictionary formatted as seen in create_character function
     """
-    print("Name:", character[0])
-    for index in range(1, 7):
-        print(str(character[index][0]) + ': ' + str(character[index][1]))
-    print("Inventory:", str(character[7]).strip('[]'))
+    for key, value in character.items():
+        print(str(key) + ': ' + str(value))
+
+
+def main():
+    opponent_one = create_character(4)
+    opponent_two = create_character(3)
+    print_character(opponent_one)
+    print_character(opponent_two)
+    combat_round(opponent_one, opponent_two)
+
+
+if __name__ == '__main__':
+    main()
 
