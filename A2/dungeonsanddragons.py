@@ -20,6 +20,8 @@ def roll_die(number_of_rolls, number_of_sides):
 
     if number_of_rolls == 0 or number_of_sides == 0:
         return 0
+    # elif number_of_rolls < 0 or number_of_sides < 0:
+    #     raise ValueError
     else:
         return total
 
