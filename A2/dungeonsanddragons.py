@@ -20,8 +20,6 @@ def roll_die(number_of_rolls, number_of_sides):
 
     if number_of_rolls == 0 or number_of_sides == 0:
         return 0
-    # elif number_of_rolls < 0 or number_of_sides < 0:
-    #     raise ValueError
     else:
         return total
 
@@ -169,12 +167,12 @@ def combat_round(opponent_one, opponent_two):
     if random.randint(1, 20) > victim['Dexterity']:
         damage = random.randint(1, random.randint(1, class_list()[attacker['Class']]))
         victim['HP'] -= damage
-        print(attacker['Name'], "hit", victim['Name'], "a total of", damage, "and",
-              victim['Name'], "now has HP of", victim['HP'])
+        print(attacker['Name'], "hit", victim['Name'], "a total of " + str(damage) + " and",
+              victim['Name'], "now has HP of", str(victim['HP']))
         if victim['HP'] <= 0:
             print(victim['Name'], "has died")
     else:
-        print(attacker['Name'], "missed,", victim['Name'], "has a total of '%d' HP" % victim['HP'])
+        print(attacker['Name'], "missed,", victim['Name'], "has a total of %d HP" % victim['HP'])
 
     if victim['HP'] <= 0:
         return None
@@ -182,12 +180,12 @@ def combat_round(opponent_one, opponent_two):
     if random.randint(1, 20) > attacker['Dexterity']:
         damage = random.randint(1, random.randint(1, class_list()[victim['Class']]))
         attacker['HP'] -= damage
-        print(victim['Name'], "hit", attacker['Name'], "a total of", damage, "damage and",
+        print(victim['Name'], "hit", attacker['Name'], "a total of", str(damage), "damage and",
               attacker['Name'], "now has HP of", attacker['HP'])
         if attacker['HP'] <= 0:
             print(attacker['Name'], "has died")
     else:
-        print(victim['Name'], "missed,", attacker['Name'], "has a total of '%d' HP" % attacker['HP'])
+        print(victim['Name'], "missed,", attacker['Name'], "has a total of " + str(attacker['HP']) + " HP")
 
 
 def print_character(character):
