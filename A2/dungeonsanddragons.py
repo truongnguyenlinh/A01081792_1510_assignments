@@ -73,9 +73,6 @@ def choose_inventory(inventory, selection):
     PRECONDITION selection must be a positive integer
     RETURN sorted dictionary of selected length for inventory
     """
-    items = ["Armor", "Shield", "Consumables", "Weapons",
-             "Gear", "Tools", "Wands", "Gold"]
-
     if (inventory is list()) or (selection == 0):
         return []
     elif selection < 0:
@@ -85,9 +82,9 @@ def choose_inventory(inventory, selection):
         print('Error: Not enough elements in list to select.')
         return None
     elif selection == len(inventory):
-        return {"Inventory": sorted(items[:])}
+        return inventory[:]
     else:
-        return {"Inventory": random.sample(sorted(items[:]), selection)}
+        return random.sample(sorted(inventory), selection)
 
 
 def class_list():
@@ -172,17 +169,20 @@ def combat_round(opponent_one, opponent_two):
     if random.randint(1, 20) > victim['Dexterity']:
         damage = random.randint(1, random.randint(1, class_list()[attacker['Class']]))
         victim['HP'] -= damage
-        print(attacker['Name'], "(attacker) hit", victim['Name'], "a total of", damage, "and",
+        print(attacker['Name'], "hit", victim['Name'], "a total of", damage, "and",
               victim['Name'], "now has HP of", victim['HP'])
         if victim['HP'] <= 0:
             print(victim['Name'], "has died")
     else:
         print(attacker['Name'], "missed,", victim['Name'], "has a total of '%d' HP" % victim['HP'])
 
+    if victim['HP'] <= 0:
+        return None
+
     if random.randint(1, 20) > attacker['Dexterity']:
         damage = random.randint(1, random.randint(1, class_list()[victim['Class']]))
         attacker['HP'] -= damage
-        print(victim['Name'], "(victim) hit", attacker['Name'], "a total of", damage, "damage and",
+        print(victim['Name'], "hit", attacker['Name'], "a total of", damage, "damage and",
               attacker['Name'], "now has HP of", attacker['HP'])
         if attacker['HP'] <= 0:
             print(attacker['Name'], "has died")
@@ -206,12 +206,18 @@ def main():
 
     items = ["armor", "shield", "consumables", "weapons",
              "gear", "tools", "wands", "gold"]
-    print(choose_inventory(items, 3))
 
-    opponent_one = create_character(4)
-    opponent_two = create_character(3)
+    opponent_one_input = int(input("Player one: enter a number from 1-10."))
+    opponent_two_input = int(input("Player two: enter a number from 1-10."))
+
+    opponent_one = create_character(opponent_one_input)
+    opponent_two = create_character(opponent_two_input)
+
+    opponent_one['Inventory'] = choose_inventory(items, int(input("Player one: enter number of inventory")))
+    opponent_two['Inventory'] = choose_inventory(items, int(input("Player two: enter number of inventory")))
+
     print_character(opponent_one)
-    print_character(opponent_two)
+    print(opponent_two)
 
     while opponent_one['HP'] > 0 and opponent_two['HP'] > 0:
         combat_round(opponent_one, opponent_two)
