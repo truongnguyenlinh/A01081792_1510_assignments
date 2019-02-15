@@ -20,14 +20,15 @@ def roll_die(number_of_rolls, number_of_sides):
     0
     >>> roll_die(0, 10)
     0
+    >>> roll_die(1, 0)
+    0
     >>> random.seed(1)
     >>> roll_die(3, 18)
     11"""
-    total = random.randint(1 * number_of_rolls, number_of_sides * number_of_rolls)
-
     if number_of_rolls == 0 or number_of_sides == 0:
         return 0
     else:
+        total = random.randint(1 * number_of_rolls, number_of_sides * number_of_rolls)
         return total
 
 
