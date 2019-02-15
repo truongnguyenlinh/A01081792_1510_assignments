@@ -29,6 +29,7 @@ class TestCreateCharacter(TestCase):
                                                                   'Strength': 14, 'Dexterity': 18, 'Constitution': 5,
                                                                   'Intelligence': 3, 'Wisdom': 18, 'Charisma': 11,
                                                                   'XP': 0, 'Inventory': []})
+        random.seed()
 
     @patch('builtins.input', side_effect=["warlock"])
     def test_create_character_length(self, mock_user_input):

@@ -14,10 +14,6 @@ class TestPrintCharacter(TestCase):
         dungeonsanddragons.print_character(character_details)
         self.assertEqual(type(mock_stdout.getvalue()), str)
 
-    # def test_print_character_with_str(self):
-    #     with self.assertRaises(TypeError):
-    #         dungeonsanddragons.print_character('')
-
     @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
     def test_print_character_error(self, mock_stdout):
         character_details = {'Name': 'Kuwe', 'Class': 'druid', 'HP': 4, 'Strength': 14, 'Dexterity': 18,

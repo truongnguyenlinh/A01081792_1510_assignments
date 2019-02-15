@@ -85,7 +85,7 @@ def choose_inventory(inventory, selection):
         return random.sample(sorted(inventory), selection)
 
 
-def class_list():
+def CLASS_LIST():
     """Provide a dictionary of classes with roll die for user to choose from.
 
     RETURN dictionary of all classes (keys) and values
@@ -97,11 +97,12 @@ def class_list():
 def class_selection():
     """Obtain class input from user from class_list dictionary.
 
+    PRECONDITION user input invalid, recursively call the function
     RETURN class string, if input is in dictionary keys
     """
     class_input = str(input("Select one of the following classes: Barbarian, Bard, Cleric, Druid, \n"
                             "Monk, Paladin, Ranger, Rogue, Sorcerer, Warlock, Wizard, Blood Hunter")).strip().lower()
-    if class_input not in class_list().keys():
+    if class_input not in CLASS_LIST().keys():
         print("Error: please select from classes provided")
         return class_selection()
     else:
@@ -125,7 +126,7 @@ def create_character(syllable):
     charisma = {'Charisma': roll_die(3, 6)}
 
     character.update({"Class": class_selection()})
-    character.update({"HP": random.randint(1, class_list()[character['Class']])})
+    character.update({"HP": random.randint(1, CLASS_LIST()[character['Class']])})
     character.update(strength)
     character.update(dexterity)
     character.update(constitution)
@@ -142,50 +143,63 @@ def create_character(syllable):
         return character
 
 
+def first_attack():
+    """Determine who attacks first.
+
+    PARAM opponent_one: a dictionary
+    PARAM opponent_two: a dictionary
+    PRECONDITION opponent_one: must be a well-formed dictionary with correct character
+    PRECONDITION opponent_two: must be a well-formed dictionary with correct character
+    RETURN boolean value, otherwise recall function
+    """
+    opponent_one_roll = random.randint(1, 20)
+    opponent_two_roll = random.randint(1, 20)
+
+    if opponent_one_roll == opponent_two_roll:
+        return first_attack()
+    elif opponent_one_roll > opponent_two_roll:
+        return True
+    else:
+        return False
+
+
 def combat_round(opponent_one, opponent_two):
-    """Produce a single round of combat between two characters.
+    """Determine the amount of damage between two characters.
 
     PARAM opponent_one: a dictionary
     PARAM opponent_two: a dictionary
     PRECONDITION opponent_one: must be a well-formed dictionary with correct character
     PRECONDITION opponent_two: must be a well-formed dictionary with correct character
     """
-    opponent_one_roll = random.randint(1, 20)
-    opponent_two_roll = random.randint(1, 20)
-
-    if opponent_one_roll == opponent_two_roll:
-        combat_round(opponent_one, opponent_two)
-        return None
-
-    if opponent_one_roll > opponent_two_roll:
+    if first_attack():
         attacker = opponent_one
         victim = opponent_two
     else:
-        attacker = opponent_two
         victim = opponent_one
+        attacker = opponent_two
 
     if random.randint(1, 20) > victim['Dexterity']:
-        damage = random.randint(1, random.randint(1, class_list()[attacker['Class']]))
+        damage = random.randint(1, random.randint(1, CLASS_LIST()[attacker['Class']]))
         victim['HP'] -= damage
-        print(attacker['Name'], "hit", victim['Name'], "a total of " + str(damage) + " and",
+        print(attacker['Name'], "hit", victim['Name'], "a total of " + str(damage) + " damage and",
               victim['Name'], "now has HP of", str(victim['HP']))
         if victim['HP'] <= 0:
             print(victim['Name'], "has died")
     else:
-        print(attacker['Name'], "missed,", victim['Name'], "has a total of %d HP" % victim['HP'])
+        print(attacker['Name'], "missed,", victim['Name'], "has a total of %s HP" % str(victim['HP']))
 
     if victim['HP'] <= 0:
         return None
 
     if random.randint(1, 20) > attacker['Dexterity']:
-        damage = random.randint(1, random.randint(1, class_list()[victim['Class']]))
+        damage = random.randint(1, random.randint(1, CLASS_LIST()[victim['Class']]))
         attacker['HP'] -= damage
         print(victim['Name'], "hit", attacker['Name'], "a total of", str(damage), "damage and",
               attacker['Name'], "now has HP of", attacker['HP'])
         if attacker['HP'] <= 0:
             print(attacker['Name'], "has died")
     else:
-        print(victim['Name'], "missed,", attacker['Name'], "has a total of " + str(attacker['HP']) + " HP")
+        print(victim['Name'], "missed,", attacker['Name'], "has a total of %s HP" % str(attacker['HP']))
 
 
 def print_character(character):
@@ -205,11 +219,8 @@ def main():
     items = ["armor", "shield", "consumables", "weapons",
              "gear", "tools", "wands", "gold"]
 
-    opponent_one_input = int(input("Player one: enter a number from 1-10."))
-    opponent_two_input = int(input("Player two: enter a number from 1-10."))
-
-    opponent_one = create_character(opponent_one_input)
-    opponent_two = create_character(opponent_two_input)
+    opponent_one = create_character(int(input("Player one: enter a number from 1-10.")))
+    opponent_two = create_character(int(input("Player two: enter a number from 1-10.")))
 
     opponent_one['Inventory'] = choose_inventory(items, int(input("Player one: enter number of inventory")))
     opponent_two['Inventory'] = choose_inventory(items, int(input("Player two: enter number of inventory")))
