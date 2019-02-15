@@ -24,7 +24,8 @@ def roll_die(number_of_rolls, number_of_sides):
     0
     >>> random.seed(1)
     >>> roll_die(3, 18)
-    11"""
+    11
+    >>> random.seed()"""
     if number_of_rolls == 0 or number_of_sides == 0:
         return 0
     else:
@@ -44,7 +45,8 @@ def generate_vowel():
     'e'
     >>> random.seed(10)
     >>> generate_vowel()
-    'u'"""
+    'u'
+    >>> random.seed()"""
     vowel_letters = 'aeiouy'
     return random.choice(vowel_letters)
 
@@ -64,7 +66,8 @@ def generate_consonant():
     'c'
     >>> random.seed(3)
     >>> generate_consonant()
-    'k'"""
+    'k'
+    >>> random.seed()"""
     consonant_letters = 'bcdfghjklmnpqrstvwxyz'
     return random.choice(consonant_letters)
 
@@ -79,9 +82,10 @@ def generate_syllables():
     >>> random.seed(30)
     >>> generate_syllables()
     'wi'
-     >>> random.seed(59)
+    >>> random.seed(59)
     >>> generate_syllables()
-    'ka'"""
+    'ka'
+    >>> random.seed()"""
     return generate_consonant() + generate_vowel()
 
 
@@ -99,7 +103,8 @@ def generate_name(syllables):
     'Xaroxa'
     >>> random.seed(20)
     >>> generate_name(4)
-    'Gizanuha'"""
+    'Gizanuha'
+    >>> random.seed()"""
     name = ""
     for num in range(syllables):
         name += generate_syllables()
@@ -123,7 +128,9 @@ def choose_inventory(inventory, selection):
     ['armor', 'shield', 'consumables']
     >>> random.seed(0)
     >>> choose_inventory(["armor", "shield", "consumables", "water"], 3)
-    ['armor', 'shield', 'water']"""
+    ['armor', 'shield', 'water']
+    >>> random.seed()
+    """
     if (inventory is list()) or (selection == 0):
         return []
     elif selection < 0:
@@ -209,7 +216,9 @@ def first_attack():
     False
      >>> random.seed(10)
     >>> first_attack()
-    True"""
+    True
+    >>> random.seed()
+    """
     opponent_one_roll = random.randint(1, 20)
     opponent_two_roll = random.randint(1, 20)
 
@@ -244,7 +253,9 @@ def combat_round(opponent_one, opponent_two):
     >>> combat_round(op_one, op_two)
     Kuwe missed, Carina has a total of 18 HP
     Carina hit Kuwe a total of 4 damage and Kuwe now has HP of 0
-    Kuwe has died"""
+    Kuwe has died
+    >>> random.seed()
+    """
     if first_attack():
         attacker = opponent_one
         victim = opponent_two
@@ -294,6 +305,7 @@ def print_character(character):
     Charisma: 11
     XP: 0
     Inventory: []
+    >>> random.seed()
     """
     for key, value in character.items():
         print(str(key) + ': ' + str(value))
