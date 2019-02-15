@@ -16,6 +16,7 @@ def roll_die(number_of_rolls, number_of_sides):
     PRECONDITION number_of_rolls is a positive int
     PRECONDITION number_of_sides is a positive int
     RETURN total value from number of rolls and sided die
+
     >>> roll_die(0, 0)
     0
     >>> roll_die(0, 10)
@@ -37,6 +38,7 @@ def generate_vowel():
     """Return a randomly selected vowel letter.
 
     RETURN random string vowel from vowel letters
+
     >>> random.seed(0)
     >>> generate_vowel()
     'o'
@@ -55,6 +57,7 @@ def generate_consonant():
     """Return a randomly selected consonant letter.
 
     RETURN random string consonant from consonant letters
+
     >>> random.seed(0)
     >>> generate_consonant()
     'q'
@@ -76,6 +79,7 @@ def generate_syllables():
     """Return one consonant and one vowel letter, concatenated.
 
     RETURN a string of two characters
+
     >>> random.seed(0)
     >>> generate_syllables()
     'qo'
@@ -95,6 +99,7 @@ def generate_name(syllables):
     PARAM syllables a positive integer
     PRECONDITION syllables must be a positive non-zero integer
     RETURN string composed of specified number of syllables
+
     >>> random.seed(8)
     >>> generate_name(2)
     'Kiqe'
@@ -119,6 +124,7 @@ def choose_inventory(inventory, selection):
     PRECONDITION inventory must be a list
     PRECONDITION selection must be a positive integer
     RETURN sorted dictionary of selected length for inventory
+
     >>> choose_inventory([],0)
     []
     >>> choose_inventory(["armor", "shield", "consumables"], 0)
@@ -149,6 +155,7 @@ def CLASS_LIST():
     """Provide a dictionary of classes with roll die for user to choose from.
 
     RETURN dictionary of all classes (keys) and values
+
     >>> CLASS_LIST()
     {'barbarian': 12, 'bard': 8, 'cleric': 8, 'druid': 8, 'fighter': 10, 'monk': 8, 'paladin': 10, 'ranger': 10, 'rogue': 8,\
  'sorcerer': 6, 'warlock': 8, 'wizard': 6, 'blood hunter': 10}
@@ -211,6 +218,7 @@ def first_attack():
     PRECONDITION opponent_one: must be a well-formed dictionary with correct character
     PRECONDITION opponent_two: must be a well-formed dictionary with correct character
     RETURN boolean value, otherwise recall function
+
     >>> random.seed(0)
     >>> first_attack()
     False
@@ -237,6 +245,7 @@ def combat_round(opponent_one, opponent_two):
     PARAM opponent_two: a dictionary
     PRECONDITION opponent_one: must be a well-formed dictionary with correct character
     PRECONDITION opponent_two: must be a well-formed dictionary with correct character
+
     >>> random.seed(0)
     >>> op_one = {'Name': 'Kuwe', 'Class': 'druid', 'HP': 4, 'Strength': 14, 'Dexterity': 18, \
     'Constitution': 5, 'Intelligence': 3, 'Wisdom': 18, 'Charisma': 11, 'XP': 0, 'Inventory': []}
@@ -292,6 +301,7 @@ def print_character(character):
 
     PARAM character: is a dictionary
     PRECONDITION character: is a dictionary formatted as seen in create_character function
+
     >>> print_character({'Name': 'Kuwe', 'Class': 'druid', 'HP': 4, 'Strength': 14, 'Dexterity': 18, \
     'Constitution': 5, 'Intelligence': 3, 'Wisdom': 18, 'Charisma': 11, 'XP': 0, 'Inventory': []})
     Name: Kuwe
