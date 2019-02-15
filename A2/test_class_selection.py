@@ -1,6 +1,8 @@
 from unittest import TestCase
 import dungeonsanddragons
 from unittest.mock import patch
+import unittest.mock
+import io
 
 
 class TestClassSelection(TestCase):

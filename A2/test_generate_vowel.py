@@ -22,4 +22,5 @@ class TestGenerateVowel(TestCase):
         random.seed(3)
         fixed = dungeonsanddragons.generate_vowel()
         self.assertEqual("e", fixed)
+        random.seed()
 

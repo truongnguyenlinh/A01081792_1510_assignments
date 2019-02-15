@@ -10,7 +10,7 @@ class TestChooseInventory(TestCase):
                  "Gear", "Tools", "Wands", "Gold"]
         selected_items = dungeonsanddragons.choose_inventory(items, 4)
         for gear in selected_items:
-            self.assertTrue(gear in items)  # ask Chris
+            self.assertTrue(gear in items)
 
     def test_choose_inventory_len(self):
         items = ["Armor", "Shield", "Consumables", "Weapons",

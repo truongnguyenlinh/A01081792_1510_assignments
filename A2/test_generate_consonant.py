@@ -22,4 +22,5 @@ class TestGenerateConsonant(TestCase):
         random.seed(3)
         fixed = dungeonsanddragons.generate_consonant()
         self.assertEqual("k", fixed)
+        random.seed()
 

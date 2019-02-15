@@ -33,4 +33,3 @@ class TestPrintCharacter(TestCase):
         dungeonsanddragons.print_character(character_details)
         self.assertEqual(mock_stdout.getvalue(), expected_output)
 
-

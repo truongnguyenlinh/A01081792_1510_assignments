@@ -103,7 +103,6 @@ def class_selection():
     class_input = str(input("Select one of the following classes: Barbarian, Bard, Cleric, Druid, \n"
                             "Monk, Paladin, Ranger, Rogue, Sorcerer, Warlock, Wizard, Blood Hunter")).strip().lower()
     if class_input not in CLASS_LIST().keys():
-        print("Error: please select from classes provided")
         return class_selection()
     else:
         return class_input

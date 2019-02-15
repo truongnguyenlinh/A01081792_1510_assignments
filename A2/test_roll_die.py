@@ -16,13 +16,18 @@ class TestRollDie(TestCase):
         with self.assertRaises(TypeError):
             dungeonsanddragons.roll_die(3, '')
 
+    def test_roll_die_integer(self):
+        self.assertEqual(0, dungeonsanddragons.roll_die(0, 0))
+
     def test_roll_die_integers(self):
         random.seed(1)
         self.assertEqual(3, dungeonsanddragons.roll_die(2, 3))
+        random.seed()
 
     def test_roll_die_integers_seed(self):
         random.seed(1)
         self.assertEqual(12, dungeonsanddragons.roll_die(4, 10))
+        random.seed()
 
     def test_roll_die_range_max(self):
         self.assertLessEqual(dungeonsanddragons.roll_die(2, 3), 6)

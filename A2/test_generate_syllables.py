@@ -14,8 +14,15 @@ class TestGenerateSyllables(TestCase):
         dnd_syllables = dungeonsanddragons.generate_syllables()
         self.assertTrue(dnd_syllables.isalpha())
 
+    def test_generate_syllables_consonant(self):
+        consonant_letters = 'bcdfghjklmnpqrstvwxyz'
+        vowel_letters = 'aeiouy'
+        syllable = dungeonsanddragons.generate_syllables()
+        self.assertTrue(syllable[0] in consonant_letters and syllable[1] in vowel_letters)
+
     def test_generate_syllables_random(self):
         random.seed(4)
         fixed = dungeonsanddragons.generate_syllables()
         self.assertEqual("ki", fixed)
+        random.seed()
 
