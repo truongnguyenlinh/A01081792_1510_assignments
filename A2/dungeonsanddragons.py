@@ -4,6 +4,7 @@
 
 
 import random
+import doctest
 
 
 def roll_die(number_of_rolls, number_of_sides):
@@ -15,7 +16,13 @@ def roll_die(number_of_rolls, number_of_sides):
     PRECONDITION number_of_rolls is a positive int
     PRECONDITION number_of_sides is a positive int
     RETURN total value from number of rolls and sided die
-    """
+    >>> roll_die(0, 0)
+    0
+    >>> roll_die(0, 10)
+    0
+    >>> random.seed(1)
+    >>> roll_die(3, 18)
+    11"""
     total = random.randint(1 * number_of_rolls, number_of_sides * number_of_rolls)
 
     if number_of_rolls == 0 or number_of_sides == 0:
@@ -27,7 +34,16 @@ def roll_die(number_of_rolls, number_of_sides):
 def generate_vowel():
     """Return a randomly selected vowel letter.
 
-    RETURN random string vowel from vowel letters"""
+    RETURN random string vowel from vowel letters
+    >>> random.seed(0)
+    >>> generate_vowel()
+    'o'
+    >>> random.seed(1)
+    >>> generate_vowel()
+    'e'
+    >>> random.seed(10)
+    >>> generate_vowel()
+    'u'"""
     vowel_letters = 'aeiouy'
     return random.choice(vowel_letters)
 
@@ -36,7 +52,18 @@ def generate_consonant():
     """Return a randomly selected consonant letter.
 
     RETURN random string consonant from consonant letters
-    """
+    >>> random.seed(0)
+    >>> generate_consonant()
+    'q'
+    >>> random.seed(1)
+    >>> generate_consonant()
+    'g'
+    >>> random.seed(2)
+    >>> generate_consonant()
+    'c'
+    >>> random.seed(3)
+    >>> generate_consonant()
+    'k'"""
     consonant_letters = 'bcdfghjklmnpqrstvwxyz'
     return random.choice(consonant_letters)
 
@@ -45,7 +72,15 @@ def generate_syllables():
     """Return one consonant and one vowel letter, concatenated.
 
     RETURN a string of two characters
-    """
+    >>> random.seed(0)
+    >>> generate_syllables()
+    'qo'
+    >>> random.seed(30)
+    >>> generate_syllables()
+    'wi'
+     >>> random.seed(59)
+    >>> generate_syllables()
+    'ka'"""
     return generate_consonant() + generate_vowel()
 
 
@@ -55,7 +90,15 @@ def generate_name(syllables):
     PARAM syllables a positive integer
     PRECONDITION syllables must be a positive non-zero integer
     RETURN string composed of specified number of syllables
-    """
+    >>> random.seed(8)
+    >>> generate_name(2)
+    'Kiqe'
+    >>> random.seed(10)
+    >>> generate_name(3)
+    'Xaroxa'
+    >>> random.seed(20)
+    >>> generate_name(4)
+    'Gizanuha'"""
     name = ""
     for num in range(syllables):
         name += generate_syllables()
@@ -70,7 +113,16 @@ def choose_inventory(inventory, selection):
     PRECONDITION inventory must be a list
     PRECONDITION selection must be a positive integer
     RETURN sorted dictionary of selected length for inventory
-    """
+    >>> choose_inventory([],0)
+    []
+    >>> choose_inventory(["armor", "shield", "consumables"], 0)
+    []
+    >>> random.seed(0)
+    >>> choose_inventory(["armor", "shield", "consumables"], 3)
+    ['armor', 'shield', 'consumables']
+    >>> random.seed(0)
+    >>> choose_inventory(["armor", "shield", "consumables", "water"], 3)
+    ['armor', 'shield', 'water']"""
     if (inventory is list()) or (selection == 0):
         return []
     elif selection < 0:
@@ -82,13 +134,16 @@ def choose_inventory(inventory, selection):
     elif selection == len(inventory):
         return inventory[:]
     else:
-        return random.sample(sorted(inventory), selection)
+        return sorted(random.sample(inventory, selection))
 
 
 def CLASS_LIST():
     """Provide a dictionary of classes with roll die for user to choose from.
 
     RETURN dictionary of all classes (keys) and values
+    >>> CLASS_LIST()
+    {'barbarian': 12, 'bard': 8, 'cleric': 8, 'druid': 8, 'fighter': 10, 'monk': 8, 'paladin': 10, 'ranger': 10, 'rogue': 8,\
+ 'sorcerer': 6, 'warlock': 8, 'wizard': 6, 'blood hunter': 10}
     """
     return {"barbarian": 12, "bard": 8, "cleric": 8, "druid": 8, "fighter": 10, "monk": 8, "paladin": 10,
             "ranger": 10, "rogue": 8, "sorcerer": 6, "warlock": 8, "wizard": 6, "blood hunter": 10}
@@ -98,8 +153,7 @@ def class_selection():
     """Obtain class input from user from class_list dictionary.
 
     PRECONDITION user input invalid, recursively call the function
-    RETURN class string, if input is in dictionary keys
-    """
+    RETURN class string, if input is in dictionary keys"""
     class_input = str(input("Select one of the following classes: Barbarian, Bard, Cleric, Druid, \n"
                             "Monk, Paladin, Ranger, Rogue, Sorcerer, Warlock, Wizard, Blood Hunter")).strip().lower()
     if class_input not in CLASS_LIST().keys():
@@ -113,8 +167,7 @@ def create_character(syllable):
 
     PARAM syllables is an int
     PRECONDITION syllables is a positive, non-zero integer
-    RETURN merged dictionary of name, attributes, HP, XP and inventory
-    """
+    RETURN merged dictionary of name, attributes, HP, XP and inventory"""
     character = {"Name": generate_name(syllable)}
 
     strength = {'Strength': roll_die(3, 6)}
@@ -150,7 +203,12 @@ def first_attack():
     PRECONDITION opponent_one: must be a well-formed dictionary with correct character
     PRECONDITION opponent_two: must be a well-formed dictionary with correct character
     RETURN boolean value, otherwise recall function
-    """
+    >>> random.seed(0)
+    >>> first_attack()
+    False
+     >>> random.seed(10)
+    >>> first_attack()
+    True"""
     opponent_one_roll = random.randint(1, 20)
     opponent_two_roll = random.randint(1, 20)
 
@@ -169,7 +227,23 @@ def combat_round(opponent_one, opponent_two):
     PARAM opponent_two: a dictionary
     PRECONDITION opponent_one: must be a well-formed dictionary with correct character
     PRECONDITION opponent_two: must be a well-formed dictionary with correct character
-    """
+    >>> random.seed(0)
+    >>> op_one = {'Name': 'Kuwe', 'Class': 'druid', 'HP': 4, 'Strength': 14, 'Dexterity': 18, \
+    'Constitution': 5, 'Intelligence': 3, 'Wisdom': 18, 'Charisma': 11, 'XP': 0, 'Inventory': []}
+    >>> op_two = {'Name': 'Carina', 'Class': 'rogue', 'HP': 18, 'Strength': 5, 'Dexterity': 4, \
+    'Constitution': 10, 'Intelligence': 6, 'Wisdom': 10, 'Charisma': 4, 'XP': 0, 'Inventory': []}
+    >>> combat_round(op_one, op_two)
+    Carina missed, Kuwe has a total of 4 HP
+    Kuwe hit Carina a total of 7 damage and Carina now has HP of 11
+    >>> random.seed(23)
+    >>> op_one = {'Name': 'Kuwe', 'Class': 'druid', 'HP': 4, 'Strength': 14, 'Dexterity': 18, \
+                   'Constitution': 5, 'Intelligence': 3, 'Wisdom': 18, 'Charisma': 11, 'XP': 0, 'Inventory': []}
+    >>> op_two = {'Name': 'Carina', 'Class': 'rogue', 'HP': 18, 'Strength': 5, 'Dexterity': 4, \
+                   'Constitution': 10, 'Intelligence': 6, 'Wisdom': 10, 'Charisma': 4, 'XP': 0, 'Inventory': []}
+    >>> combat_round(op_one, op_two)
+    Kuwe missed, Carina has a total of 18 HP
+    Carina hit Kuwe a total of 4 damage and Kuwe now has HP of 0
+    Kuwe has died"""
     if first_attack():
         attacker = opponent_one
         victim = opponent_two
@@ -206,6 +280,19 @@ def print_character(character):
 
     PARAM character: is a dictionary
     PRECONDITION character: is a dictionary formatted as seen in create_character function
+    >>> print_character({'Name': 'Kuwe', 'Class': 'druid', 'HP': 4, 'Strength': 14, 'Dexterity': 18, \
+    'Constitution': 5, 'Intelligence': 3, 'Wisdom': 18, 'Charisma': 11, 'XP': 0, 'Inventory': []})
+    Name: Kuwe
+    Class: druid
+    HP: 4
+    Strength: 14
+    Dexterity: 18
+    Constitution: 5
+    Intelligence: 3
+    Wisdom: 18
+    Charisma: 11
+    XP: 0
+    Inventory: []
     """
     for key, value in character.items():
         print(str(key) + ': ' + str(value))
@@ -213,6 +300,8 @@ def print_character(character):
 
 def main():
     """Execute the program."""
+    doctest.testmod()
+
     print(roll_die(2, 8))
 
     items = ["armor", "shield", "consumables", "weapons",
