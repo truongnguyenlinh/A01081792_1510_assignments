@@ -1,4 +1,4 @@
-def character_name():
+def character_name() -> str:
     """Obtain input of user-name.
 
     RETURN string of name entered
@@ -23,17 +23,12 @@ def character_name():
         return character_name()
 
 
-def class_selection():
+def class_selection() -> str:
     """Obtain class-selection from user.
 
     RETURN selected class from set list.
     """
     class_filters = ["Cleric", "Warrior", "Thief", "Ranger"]
-    # {"Cleric": {"HP": 100, "MANA": 80, "XP": 0, "MVS": 500, "INT": 0},
-    #  "Warrior": {"HP": 160, "MANA": 20, "XP": 0, "MVS": 500, "INT": 0},
-    #  "Thief": {"HP": 80, "MANA": 40, "XP": 0, "MVS": 500, "INT": 0},
-    #  "Ranger": {"HP": 160, "MANA": 40, "XP": 0, "MVS": 500, "INT": 0}}
-
     class_input = input("Enter your desired class from the following: " + ", ".join(class_filters))
     class_input = class_input.strip().title()
     if class_input.strip().title() in class_filters:
@@ -43,7 +38,7 @@ def class_selection():
         return class_selection()
 
 
-def select_gender():
+def select_gender() -> str:
     """Return selected gender from Male or Female.
 
     RETURN a string of either male or female"""
@@ -57,8 +52,11 @@ def select_gender():
         return select_gender()
 
 
-def character_information():
-    character = [character_name(), class_selection(), select_gender()]
+def character_information() -> dict:
+    """Store all user input into a list.
+
+    RETURN dictionary of character information"""
+    character = {"Name": character_name(), "Class": class_selection(), "Gender": select_gender(), "HP": 10}
     print("Hello, %s the %s! The goal of this SUD is to roam the earth, defeating all monsters encountered.\n"
           "If you encounter a monster, you may flee or flight; however, the battle will be a combat to the death.\n"
           "Fear not, if you leave a battle wounded, 1HP will be added to your health until you reach a max of 10HP,\n"
@@ -67,12 +65,12 @@ def character_information():
           "the same time; keep this in mind moving forward.\n"
           "You may only move in directions of North, East, South and West within the constraints of our \n"
           "fantastic world and at any time, enter 'quit' to end the game. Good Luck!"
-          % (character[0], character[1]))
+          % (list(character.values())[0], list(character.values())[1]))
+    return character
 
 
 def main():
-    # character_information()
-    pass
+    character_information()
 
 
 if __name__ == '__main__':
