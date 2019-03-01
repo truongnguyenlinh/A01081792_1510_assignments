@@ -63,7 +63,8 @@ def move_south(char: dict) -> int:
 def move_character(pokemon: dict):
     """Obtain user input to determine new position."""
     current_position = pokemon["Position"]
-    user_direction_input = user_input_type("Position(x, y): %s\nWhere would you like to go? (N/E/S/W)" % current_position)
+    user_direction_input = user_input_type("Position(x, y): %s\nWhere would you like to go? (N/E/S/W)\n"
+                                           % current_position)
 
     if user_direction_input.strip().upper() == "W":
         move_west(pokemon)
