@@ -1,4 +1,4 @@
-from sud import user_input_type
+from character import user_input_type
 
 
 def dungeon_map() -> []:

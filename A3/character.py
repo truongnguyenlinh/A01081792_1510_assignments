@@ -1,4 +1,10 @@
-from sud import user_input_type
+def user_input_type(msg: str) -> str:
+    """End program if user input is quit."""
+    user_input = input(msg)
+    if user_input.strip().lower() == "quit":
+        exit()
+    else:
+        return user_input
 
 
 def character_name() -> str:

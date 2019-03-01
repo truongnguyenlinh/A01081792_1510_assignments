@@ -1,12 +1,3 @@
-def user_input_type(prefix: str) -> str:
-    """"""
-    user_input = input(prefix)
-    if user_input.strip().lower() == "quit":
-        exit()
-    else:
-        return user_input
-
-
 def main():
     print("______________________________________________________________________")
     print("[]    ,-`  ,-`’```’-,:`’-,       \                      ,--,:`,     []")
