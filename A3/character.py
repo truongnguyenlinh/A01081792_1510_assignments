@@ -64,8 +64,8 @@ def character_information() -> dict:
     
     print("Hello, %s the %s! The goal of this world is to roam the regions, defeating all Pokemon encountered.\n"
           "If you encounter a Pokemon, you may flee or flight; however, the battle will be a combat to the death.\n"
-          "Fear not, if you leave a battle wounded, 1HP will be added to your health until you reach a max of 10HP,\n"
-          "for every move where you are not in battle. "
+          "Fear not, if you leave a battle wounded, 1HP will be added to your health until you reach a max of 10HP.\n"
+          "Your HP will only go up, for every move where you are not in battle. "
           "Additionally, if you choose to flee from a battle, \nthere is a chance that your opponent will attack at "
           "the same time; keep this in mind moving forward.\n"
           "You may only move in directions of North, East, South and West within the constraints of our \n"
