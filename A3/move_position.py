@@ -1,14 +1,5 @@
 from character import user_input_type
-
-
-def dungeon_map() -> []:
-    """Interpret a square map of potential positions which a user can move to.
-    """
-    map_positions = [(0, 0), (1, 0), (2, 0), (3, 0),
-                     (0, 1), (1, 1), (2, 1), (3, 1),
-                     (0, 2), (1, 2), (2, 2), (3, 2),
-                     (0, 3), (1, 3), (2, 3), (3, 3)]
-    return map_positions
+import random
 
 
 def move_west(char: dict) -> int:
@@ -18,7 +9,7 @@ def move_west(char: dict) -> int:
     current_x_position = char["Position"][0]
 
     if (current_x_position - 1) == -1:
-        print("You're out of bounds and feeling scared. Due to this, you head back to your original position.")
+        print("You head West out of bounds and feeling scared. Due to this, you head back to your original position.")
         move_character(char)
     elif char["HP"] < 10:
         return char["Position"][0] - 1 and char["HP"] + 1
@@ -46,10 +37,11 @@ def move_north(char: dict) -> int:
     RETURN y coordinate of characters new position - 1"""
     current_y_position = char["Position"][1]
     if (current_y_position - 1) == -1:
-        print("You're out of bounds and feeling scared. Due to this, you head back to your original position.")
+        print("You head North out of bounds and find a bush of berries. Unfortunately, they're poisonous and "
+              "make you sick. Due to this, you head back to your original position.")
         move_character(char)
     elif char["HP"] < 10:
-        return char["Position"][0] - 1 and char["HP"] + 1
+        return char["Position"][1] - 1 and char["HP"] + 1
     else:
         return char["Position"][1] - 1
 
@@ -60,16 +52,17 @@ def move_south(char: dict) -> int:
     RETURN y coordinate of characters new position, + 1"""
     current_y_position = char["Position"][1]
     if (current_y_position + 1) == 4:
-        print("You're out of bounds and feeling scared. Due to this, you head back to your original position.")
+        print("You head South out of bounds and feeling scared. Due to this, you head back to your original position.")
         move_south(current_y_position)
     elif char["HP"] < 10:
-        return char["Position"][0] + 1 and char["HP"] + 1
+        return char["Position"][1] + 1 and char["HP"] + 1
     else:
         return char["Position"][1] + 1
 
 
 def move_character(pokemon: dict):
     """Obtain user input to determine new position."""
+    print("|¯|¯|¯|¯|\n|¯|¯|¯|¯|\n|¯|¯|¯|¯|\n|¯|¯|¯|¯|\n")
     current_position = pokemon["Position"]
     user_direction_input = user_input_type("Position(x, y): %s | HP: %s\nWhere would you like to go? (N/E/S/W)\n"
                                            % (current_position, pokemon["HP"]))
