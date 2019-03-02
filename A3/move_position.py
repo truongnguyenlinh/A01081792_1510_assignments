@@ -20,6 +20,8 @@ def move_west(char: dict) -> int:
     if (current_x_position - 1) == -1:
         print("You're out of bounds and feeling scared. Due to this, you head back to your original position.")
         move_character(char)
+    elif char["HP"] < 10:
+        return char["Position"][0] - 1 and char["HP"] + 1
     else:
         return char["Position"][0] - 1
 
@@ -32,6 +34,8 @@ def move_east(char: dict) -> int:
     if (current_x_position + 1) == 4:
         print("You head East out of bounds and step in mud! You go back to your original position, to clean your feet")
         move_character(char)
+    elif char["HP"] < 10:
+        return char["Position"][0] + 1 and char["HP"] + 1
     else:
         return char["Position"][0] + 1
 
@@ -44,6 +48,8 @@ def move_north(char: dict) -> int:
     if (current_y_position - 1) == -1:
         print("You're out of bounds and feeling scared. Due to this, you head back to your original position.")
         move_character(char)
+    elif char["HP"] < 10:
+        return char["Position"][0] - 1 and char["HP"] + 1
     else:
         return char["Position"][1] - 1
 
@@ -56,6 +62,8 @@ def move_south(char: dict) -> int:
     if (current_y_position + 1) == 4:
         print("You're out of bounds and feeling scared. Due to this, you head back to your original position.")
         move_south(current_y_position)
+    elif char["HP"] < 10:
+        return char["Position"][0] + 1 and char["HP"] + 1
     else:
         return char["Position"][1] + 1
 
@@ -63,8 +71,8 @@ def move_south(char: dict) -> int:
 def move_character(pokemon: dict):
     """Obtain user input to determine new position."""
     current_position = pokemon["Position"]
-    user_direction_input = user_input_type("Position(x, y): %s\nWhere would you like to go? (N/E/S/W)\n"
-                                           % current_position)
+    user_direction_input = user_input_type("Position(x, y): %s | HP: %s\nWhere would you like to go? (N/E/S/W)\n"
+                                           % (current_position, pokemon["HP"]))
 
     if user_direction_input.strip().upper() == "W":
         move_west(pokemon)

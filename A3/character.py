@@ -14,13 +14,13 @@ def character_name() -> str:
 
     RETURN string of name entered
     """
-    name = user_input_type("Enter your name, adventurer.\n")
+    name = input("Enter your name, adventurer.\n")
     name = name.title()
     if not name.isalpha():
         print("I'm sorry, I don't quite understand!")
         return character_name()
 
-    confirm_name = user_input_type("Did I get that right, %s (Y/N)?\n" % name)
+    confirm_name = input("Did I get that right, %s (Y/N)?\n" % name)
     if confirm_name.strip().upper() == "N":
         print("I'm sorry!")
         return character_name()
@@ -40,8 +40,8 @@ def class_selection() -> str:
     RETURN selected class from set list.
     """
     class_type = {"1": "Squirtle", "2": "Charmander", "3": "Bulbasaur\n"}
-    class_input = user_input_type("Enter a number of your desired Pokemon type from the following:\n"
-                                  "1. Squirtle\n2. Charmander\n3. Bulbasaur\n")
+    class_input = input("Enter a number of your desired Pokemon type from the following:\n"
+                        "1. Squirtle\n2. Charmander\n3. Bulbasaur\n")
     class_input = class_input.strip()
     if class_input in class_type.keys():
         return class_type[class_input]
@@ -55,7 +55,7 @@ def select_gender() -> str:
 
     RETURN a string of either male or female"""
     gender_types = {"1": "Male", "2": "Female"}
-    gender_input = user_input_type("Please enter one of the two numbers to select your gender:\n1. Male\n2. Female\n")
+    gender_input = input("Please enter one of the two numbers to select your gender:\n1. Male\n2. Female\n")
     gender_input = gender_input.strip()
     if gender_input in gender_types.keys():
         return gender_types[gender_input]
