@@ -28,7 +28,9 @@ def main():
     print("[]     \   \                       '-_/’-‘--,- ---,, __,,-`         []")
     print("======================================================================")
     pokemon = character.character_information()
-    move_position.move_character(pokemon)
+
+    while True:
+        move_position.move_character(pokemon)
 
 
 if __name__ == '__main__':
