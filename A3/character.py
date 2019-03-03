@@ -1,14 +1,3 @@
-def user_input_type(msg: str) -> str:
-    """End program if user input is quit.
-
-    RETURN user input if not quit"""
-    user_input = input(msg)
-    if user_input.strip().lower() == "quit":
-        exit()
-    else:
-        return user_input
-
-
 def character_name() -> str:
     """Obtain input of user-name.
 

@@ -1,5 +1,4 @@
-from character import user_input_type
-import random
+from global_helper import user_input_type
 
 
 def move_west(char: dict) -> int:
