@@ -1,4 +1,4 @@
-def dungeon_map() -> []:
+def dungeon_map() -> list:
     """Interpret a square map of potential positions which a user can move to.
     """
     map_positions = [[[0, 0], [1, 0], [2, 0], [3, 0]],

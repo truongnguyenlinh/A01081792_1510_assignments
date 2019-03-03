@@ -15,7 +15,7 @@ def combat_round(pokemon: dict, opponent: dict):
         opponent["HP"] -= pokemon_attack
         print("You attacked %s with a slap and he took %s damage." % (opponent["Name"], pokemon_attack))
         if opponent["HP"] <= 0:
-            print("Success! Your opponent has died and you gained 20 prize dollars from your battle.")
+            print("Success! Your opponent has fainted and you gained 20 prize dollars from your battle.")
 
     if opponent["HP"] <= 0:
         return None
@@ -25,7 +25,7 @@ def combat_round(pokemon: dict, opponent: dict):
         print("%s attacked you with %s and you took %s damage."
               % (opponent["Name"], opponent["Attack"], opponent_attack))
         if pokemon["HP"] <= 0:
-            print("You died. Try again next time!")
+            print("You fainted. Try again next time!")
             exit()
 
     while True:
@@ -40,6 +40,8 @@ def potential_attack(pokemon: dict, opponent: dict):
         pokemon["HP"] -= opponent_attack
         print("Despite fleeing, %s still attacked you! He inflicted you by %s damage."
               % (opponent["Name"], opponent_attack))
+    else:
+        print("You fled successfully!")
 
 
 def fight_flee(pokemon: dict, opponent: dict):
