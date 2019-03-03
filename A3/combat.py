@@ -15,7 +15,7 @@ def combat_round(pokemon: dict, opponent: dict):
         opponent["HP"] -= pokemon_attack
         print("You attacked %s with a slap and he took %s damage." % (opponent["Name"], pokemon_attack))
         if opponent["HP"] <= 0:
-            print("Success! Your opponent has fainted and you gained 20 prize dollars from your battle.")
+            print("Success! Your opponent has fainted and you gained 20 prize dollars from your battle.\n")
 
     if opponent["HP"] <= 0:
         return None
@@ -57,7 +57,8 @@ def fight_flee(pokemon: dict, opponent: dict):
             user_input = user_input_type("Would you like to fight or flee?\n")
 
         if user_input.strip().title() == "Fight":
-            print("You encountered %s! It's time for a Poke-Battle." % opponent["Name"])
+            print("%s | HP: %s \nYou encountered %s! It's time for a Poke-Battle.\n"
+                  % (opponent["Name"], opponent["HP"], opponent["Name"]))
             combat_round(pokemon, opponent)
         elif user_input.strip().title() == "Flee":
             potential_attack(pokemon, opponent)
