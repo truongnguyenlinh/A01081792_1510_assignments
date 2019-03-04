@@ -1,4 +1,5 @@
 import random
+import doctest
 
 
 def random_pokemon() -> dict:
@@ -19,3 +20,11 @@ def random_pokemon() -> dict:
     pokemon_4 = {"Name": "Palkia", "Class": "Water", "Attack": "Pressure", "HP": 5}
     lop = [pokemon_1, pokemon_2, pokemon_3, pokemon_4]
     return random.choice(lop)
+
+
+def main():
+    doctest.testmod()
+
+
+if __name__ == '__main__':
+    main()
