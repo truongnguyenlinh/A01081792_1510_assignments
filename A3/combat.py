@@ -50,7 +50,19 @@ def combat_round(pokemon: dict, opponent: dict):
 
 
 def potential_attack(pokemon: dict, opponent: dict):
-    opponent_probability_attack = (1, 10)
+    """Determine whether opponene will do damage to user.
+
+    >>> random.seed(31)
+    >>> potential_attack({"Name": "Char", "Class": "Charmander", "Position": [2, 2], "HP": 8}, \
+    {"Name": "Pikachu", "Class": "Electric", "Attack": "Static", "HP": 5})
+    Despite fleeing, Pikachu still attacked you! He inflicted you by 4 damage.
+    >>> potential_attack({"Name": "Ben", "Class": "Squirtle", "Position": [1, 0], "HP": 5}, \
+    {"Name": "Pikachu", "Class": "Electric", "Attack": "Static", "HP": 5})
+    You fled successfully!
+    >>> random.seed()
+    """
+
+    opponent_probability_attack = roll_die(1, 10)
     opponent_attack = roll_die(1, 4)
 
     if opponent_probability_attack == 1:
