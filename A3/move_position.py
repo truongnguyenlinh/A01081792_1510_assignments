@@ -1,18 +1,31 @@
 import random
+import doctest
 from combat import fight_flee
 from pokemon import random_pokemon
 from global_helper import user_input_type, roll_die
 
 
-def random_message() -> str:
+def random_message():
     """Return random message.
 
-    RETURN string of random message"""
+    RETURN string of random message
+
+    >>> random.seed(4)
+    >>> random_message()
+    Looks like there's something shiny behind a tree. You head towards the tree and find a Big Pearl.
+    The pearlescent sheen is irresistible, so you put it in your bag.
+    >>> random_message()
+    After stepping out of the grass, you find some Gooey Mulch.
+    Although a maniac would buy this to use as fertilizer on a Berry Crop, you decide not to pick it up.
+    >>> random_message()
+    You head towards the grass and continue on your path.
+    >>> random.seed()
+    """
 
     msg_1 = "You encountered a delicious Pecha Berry bush! Feeling hungry, pick a some berries and have a snack."
     msg_2 = "Looks like there's something shiny behind a tree. You head towards the tree and find a Big Pearl.\n" \
             "The pearlescent sheen is irresistible, so you put it in your bag."
-    msg_3 = "After stepping out of the grass, you find some Gooey Mulch. " \
+    msg_3 = "After stepping out of the grass, you find some Gooey Mulch.\n" \
             "Although a maniac would buy this to use as fertilizer on a Berry Crop, you decide not to pick it up."
     msg_4 = "You head towards the grass and continue on your path."
 
@@ -20,9 +33,9 @@ def random_message() -> str:
     msg_probability = roll_die(1, 3)
 
     if msg_probability == 1:
-        return random.choice(msg_list)
+        print(random.choice(msg_list))
     else:
-        return msg_4
+        print(msg_4)
 
 
 def move_west(char: dict) -> None:
@@ -38,10 +51,10 @@ def move_west(char: dict) -> None:
     elif char["HP"] < 10:
         char["Position"][0] -= 1
         char["HP"] += 1
-        print(random_message())
+        random_message()
     else:
         char["Position"][0] -= 1
-        print(random_message())
+        random_message()
     fight_flee(char, opponent_pokemon)
 
 
@@ -58,10 +71,10 @@ def move_east(char: dict) -> None:
     elif char["HP"] < 10:
         char["Position"][0] += 1
         char["HP"] += 1
-        print(random_message())
+        random_message()
     else:
         char["Position"][0] += 1
-        print(random_message())
+        random_message()
     fight_flee(char, opponent_pokemon)
 
 
@@ -79,10 +92,10 @@ def move_north(char: dict) -> None:
     elif char["HP"] < 10:
         char["Position"][1] -= 1
         char["HP"] += 1
-        print(random_message())
+        random_message()
     else:
         char["Position"][1] -= 1
-        print(random_message())
+        random_message()
     fight_flee(char, opponent_pokemon)
 
 
@@ -99,10 +112,10 @@ def move_south(char: dict) -> None:
     elif char["HP"] < 10:
         char["Position"][1] += 1
         char["HP"] += 1
-        print(random_message())
+        random_message()
     else:
         char["Position"][1] += 1
-        print(random_message())
+        random_message()
     fight_flee(char, opponent_pokemon)
 
 
@@ -124,3 +137,11 @@ def move_character(pokemon: dict):
     else:
         print("I can't understand Pokemon language! Please try again.")
         move_character(pokemon)
+
+
+def main():
+    doctest.testmod()
+
+
+if __name__ == '__main__':
+    main()
