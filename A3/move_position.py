@@ -7,7 +7,7 @@ from global_helper import user_input_type, roll_die
 
 
 def random_message():
-    """Return random message.
+    """Return random message from predefined list.
 
     RETURN string of random message
 
@@ -22,7 +22,6 @@ def random_message():
     You head towards the grass and continue on your path.
     >>> random.seed()
     """
-
     msg_1 = "You encountered a delicious Pecha Berry bush! Feeling hungry, pick a some berries and have a snack."
     msg_2 = "Looks like there's something shiny behind a tree. You head towards the tree and find a Big Pearl.\n" \
             "The pearlescent sheen is irresistible, so you put it in your bag."
@@ -40,9 +39,9 @@ def random_message():
 
 
 def move_west(char: dict) -> None:
-    """Moves character West on arbitrary map.
+    """Move character West on arbitrary map.
 
-    RETURN None if character choice is outside of range"""
+    RETURN None if y coordinate is out of bounds at -1"""
     current_x_position = char["Position"][0]
     opponent_pokemon = random_pokemon()
     if (current_x_position - 1) == -1:
@@ -60,9 +59,9 @@ def move_west(char: dict) -> None:
 
 
 def move_east(char: dict) -> None:
-    """Moves character East on arbitrary map.
+    """Move character East on arbitrary map.
 
-    RETURN None if character choice is outside of range"""
+    RETURN None if y coordinate is out of bounds at 4"""
     opponent_pokemon = random_pokemon()
     current_x_position = char["Position"][0]
     if (current_x_position + 1) == 4:
@@ -80,9 +79,9 @@ def move_east(char: dict) -> None:
 
 
 def move_north(char: dict) -> None:
-    """Moves character North on arbitrary map.
+    """Move character North on arbitrary map.
 
-    RETURN y coordinate of characters new position - 1"""
+    RETURN None if y coordinate is out of bounds at -1"""
     opponent_pokemon = random_pokemon()
     current_y_position = char["Position"][1]
     if (current_y_position - 1) == -1:
@@ -101,9 +100,9 @@ def move_north(char: dict) -> None:
 
 
 def move_south(char: dict) -> None:
-    """Moves character south on arbitrary map.
+    """Move character South on arbitrary map.
 
-    RETURN None if character choice is outside of range"""
+    RETURN None if y coordinate is out of bounds at 4"""
     opponent_pokemon = random_pokemon()
     current_y_position = char["Position"][1]
     if (current_y_position + 1) == 4:
@@ -121,7 +120,8 @@ def move_south(char: dict) -> None:
 
 
 def move_character(pokemon: dict):
-    """Obtain user input to determine new position."""
+    """Obtain user input to determine new position.
+    """
     dungeon_map.dungeon_map(pokemon)
     current_position = pokemon["Position"]
     user_direction_input = user_input_type("Position(x, y): %s | HP: %s\nWhere would you like to go? (N/E/S/W)\n"
