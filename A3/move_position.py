@@ -1,5 +1,4 @@
 import random
-from dungeon_map import dungeon_map
 from combat import fight_flee
 from pokemon import random_pokemon
 from global_helper import user_input_type, roll_die

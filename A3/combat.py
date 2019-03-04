@@ -1,3 +1,5 @@
+import random
+import doctest
 from global_helper import user_input_type, roll_die
 
 
@@ -5,7 +7,23 @@ def combat_round(pokemon: dict, opponent: dict):
     """Determine the amount of damage between two opponents.
 
     PRECONDITION pokemon: must be a well-formed dictionary from character
-    PRECONDITION opponent: must be a well-formed dictionary from random_monster
+    PRECONDITION opponent: must be a well-formed dictionary from random_pokemon
+    >>> random.seed(3)
+    >>> combat_round({"Name": "Tyson", "Class": "Squirtle", "Position": [0, 0], "HP": 10}, \
+    {'Name': 'Palkia', 'Class': 'Water', 'Attack': 'Pressure', 'HP': 5})
+    You attacked Palkia with a slap and he took 2 damage.
+    Palkia attacked you with Pressure and you took 5 damage.
+    You attacked Palkia with a slap and he took 5 damage.
+    Success! Your opponent has fainted and you gained 20 prize dollars from your battle.
+    <BLANKLINE>
+    >>> combat_round({"Name": "Angus", "Class": "Bulbasaur", "Position": [3, 1], "HP": 6}, \
+    {"Name": "Dragonite", "Class": "Dragon", "Attack": "Inner Focus", "HP": 5})
+    You attacked Dragonite with a slap and he took 3 damage.
+    Dragonite attacked you with Inner Focus and you took 5 damage.
+    You attacked Dragonite with a slap and he took 4 damage.
+    Success! Your opponent has fainted and you gained 20 prize dollars from your battle.
+    <BLANKLINE>
+    >>> random.seed()
     """
     pokemon_attack = roll_die(1, 6)
     opponent_attack = roll_die(1, 6)
@@ -61,3 +79,11 @@ def fight_flee(pokemon: dict, opponent: dict):
             combat_round(pokemon, opponent)
         elif user_input.strip().title() == "Flee":
             potential_attack(pokemon, opponent)
+
+
+def main():
+    doctest.testmod()
+
+
+if __name__ == '__main__':
+    main()
