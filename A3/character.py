@@ -42,7 +42,8 @@ def class_selection() -> str:
 def character_information() -> dict:
     """Store all user input into a list.
 
-    RETURN dictionary of character information"""
+    RETURN dictionary of character information
+    """
 
     character = {"Name": character_name(), "Class": class_selection(), "Position": [0, 0], "HP": 10}
 
