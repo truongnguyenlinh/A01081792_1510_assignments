@@ -1,4 +1,3 @@
-import random
 from global_helper import user_input_type, roll_die
 
 
@@ -47,7 +46,7 @@ def potential_attack(pokemon: dict, opponent: dict):
 def fight_flee(pokemon: dict, opponent: dict):
     """Determine whether opponent will fight or flee.
     """
-    encounter_percentage = random.randint(1, 10)
+    encounter_percentage = roll_die(1, 10)
     if encounter_percentage == 1:
         print("You encountered another Pokemon!")
         user_input = user_input_type("Would you like to fight or flee?\n")
