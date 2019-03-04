@@ -21,15 +21,16 @@ def roll_die(number_of_rolls: int, number_of_sides: int) -> int:
     PRECONDITION number_of_sides is a positive int
     RETURN total value from number of rolls and sided die
 
+    >>> random.seed(1)
     >>> roll_die(0, 0)
     0
     >>> roll_die(0, 10)
     0
     >>> roll_die(1, 0)
     0
-    >>> random.seed(1)
     >>> roll_die(1, 9)
     3
+    >>> random.seed()
     """
 
     if type(number_of_rolls) != int or type(number_of_sides) != int:
