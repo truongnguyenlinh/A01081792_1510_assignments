@@ -8,6 +8,7 @@ def combat_round(pokemon: dict, opponent: dict):
 
     PRECONDITION pokemon: must be a well-formed dictionary from character
     PRECONDITION opponent: must be a well-formed dictionary from random_pokemon
+
     >>> random.seed(3)
     >>> combat_round({"Name": "Tyson", "Class": "Squirtle", "Position": [0, 0], "HP": 10}, \
     {'Name': 'Palkia', 'Class': 'Water', 'Attack': 'Pressure', 'HP': 5})
@@ -50,7 +51,10 @@ def combat_round(pokemon: dict, opponent: dict):
 
 
 def potential_attack(pokemon: dict, opponent: dict):
-    """Determine whether opponene will do damage to user.
+    """Determine whether opponent will do damage to user.
+
+    PRECONDITION pokemon: must be a well-formed dictionary from character
+    PRECONDITION opponent: must be a well-formed dictionary from random_pokemon
 
     >>> random.seed(31)
     >>> potential_attack({"Name": "Char", "Class": "Charmander", "Position": [2, 2], "HP": 8}, \
@@ -75,6 +79,9 @@ def potential_attack(pokemon: dict, opponent: dict):
 
 def fight_flee(pokemon: dict, opponent: dict):
     """Determine whether opponent will fight or flee.
+
+    PRECONDITION pokemon: must be a well-formed dictionary from character
+    PRECONDITION opponent: must be a well-formed dictionary from random_pokemon
     """
     encounter_percentage = roll_die(1, 10)
     if encounter_percentage == 1:
