@@ -1,7 +1,7 @@
 def character_name() -> str:
-    """Obtain input of user-name.
+    """Obtain name input from user.
 
-    RETURN string of name entered
+    RETURN string of entered name
     """
     name = input("Enter your name, adventurer.\n")
     name = name.title()
@@ -24,12 +24,12 @@ def character_name() -> str:
 
 
 def class_selection() -> str:
-    """Obtain class-selection from user.
+    """Obtain selected class from user.
 
     RETURN selected class from set list.
     """
     class_type = {"1": "Squirtle", "2": "Charmander", "3": "Bulbasaur\n"}
-    class_input = input("Enter a number of your desired Pokemon type from the following:\n"
+    class_input = input("Enter the corresponding number of your desired Pokemon type:\n"
                         "1. Squirtle\n2. Charmander\n3. Bulbasaur\n")
     class_input = class_input.strip()
     if class_input in class_type.keys():
@@ -44,7 +44,6 @@ def character_information() -> dict:
 
     RETURN dictionary of character information
     """
-
     character = {"Name": character_name(), "Class": class_selection(), "Position": [0, 0], "HP": 10}
 
     print("Hello, %s the %s! The goal of this world is to roam the regions, defeating all Pokemon encountered.\n"
