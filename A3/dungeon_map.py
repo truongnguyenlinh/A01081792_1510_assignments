@@ -1,8 +1,14 @@
-def dungeon_map() -> list:
+def dungeon_map(pokemon: dict):
     """Interpret a square map of potential positions which a user can move to.
     """
-    map_positions = [[[0, 0], [1, 0], [2, 0], [3, 0]],
-                     [[0, 1], [1, 1], [2, 1], [3, 1]],
-                     [[0, 2], [1, 2], [2, 2], [3, 2]],
-                     [[0, 3], [1, 3], [2, 3], [3, 3]]]
-    return map_positions
+    map_positions = [["X", "X", "X", "X"],
+                     ["X", "X", "X", "X"],
+                     ["X", "X", "X", "X"],
+                     ["X", "X", "X", "X"]]
+
+    pokemon_x = pokemon["Position"][0]
+    pokemon_y = pokemon["Position"][1]
+    map_positions[pokemon_y][pokemon_x] = "P"
+
+    for row in map_positions:
+        print(" ".join(row))
