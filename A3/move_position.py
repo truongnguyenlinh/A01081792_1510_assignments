@@ -1,5 +1,5 @@
 import random
-import dungeon_map
+import interactive_map
 import doctest
 from combat import fight_flee
 from pokemon import random_pokemon
@@ -122,7 +122,7 @@ def move_south(char: dict) -> None:
 def move_character(pokemon: dict):
     """Obtain user input to determine new position.
     """
-    dungeon_map.dungeon_map(pokemon)
+    interactive_map.pokemon_map(pokemon)
     current_position = pokemon["Position"]
     user_direction_input = user_input_type("Position(x, y): %s | HP: %s\nWhere would you like to go? (N/E/S/W)\n"
                                            % (current_position, pokemon["HP"]))
