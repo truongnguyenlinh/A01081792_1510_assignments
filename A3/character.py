@@ -1,3 +1,4 @@
+import doctest
 import copy
 
 
@@ -72,6 +73,9 @@ def get_pokemon() -> dict:
     """Produce updated global dictionary variable.
 
     RETURN global character dictionary
+
+    >>> get_pokemon()
+    {'Position': [0, 0], 'HP': 10}
     """
     global pokemon
     user_pokemon = copy.deepcopy(pokemon)
@@ -97,3 +101,11 @@ def change_column(position: int) -> None:
     """
     global pokemon
     pokemon["Position"][1] += position
+
+
+def main():
+    doctest.testmod()
+
+
+if __name__ == '__main__':
+    main()
