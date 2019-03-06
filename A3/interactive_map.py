@@ -2,7 +2,7 @@ import doctest
 from character import get_pokemon
 
 
-def pokemon_map(pokemon: dict):
+def pokemon_map():
     """Interpret a square map with user location and available spots.
 
     PRECONDITION character must be a well-formed dictionary seen in get_pokemon
