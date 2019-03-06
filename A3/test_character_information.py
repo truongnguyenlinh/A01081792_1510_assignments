@@ -1,5 +1,5 @@
 from unittest import TestCase
-from character import character_information
+from character import character_information, pokemon
 from unittest.mock import patch
 import unittest
 import io
@@ -38,4 +38,9 @@ class TestCharacterInformation(TestCase):
     def test_character_information_len(self, mock_user_input):
         """Length of global variable is updated from 2 to 4."""
         self.assertEqual(len(character_information()), 4)
+
+    @patch('builtins.input', side_effect=["TrOyE", "Y", "3"])
+    def test_character_information_same_global(self, mock_user_input):
+        """User input is updated in global variable."""
+        self.assertEqual(character_information(), pokemon)
 
