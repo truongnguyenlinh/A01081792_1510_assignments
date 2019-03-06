@@ -15,9 +15,13 @@ class TestPokemonMap(TestCase):
     @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
     def test_pokemon_map_output(self, mock_stdout):
         """Determine printed output from given character."""
-        expected_output = "P X X X\n"\
-                          "X X X X\n"\
-                          "X X X X\n"\
-                          "X X X X\n"
+        expected_output = "P  X  X  X  X  X  X  X\n"\
+                          "X  X  X  X  X  X  X  X\n"\
+                          "X  X  X  X  X  X  X  X\n"\
+                          "X  X  X  X  X  X  X  X\n"\
+                          "X  X  X  X  X  X  X  X\n"\
+                          "X  X  X  X  X  X  X  X\n"\
+                          "X  X  X  X  X  X  X  X\n"\
+                          "X  X  X  X  X  X  X  X\n"
         pokemon_map()
         self.assertEqual(mock_stdout.getvalue(), expected_output)
