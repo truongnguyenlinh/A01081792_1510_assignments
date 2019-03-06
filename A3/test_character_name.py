@@ -12,3 +12,4 @@ class TestCharacterName(TestCase):
         expected_output = "Welcome to the magical Pokemon SUD, Helios!\n"
         character_name()
         self.assertEqual(mock_stdout.getvalue(), expected_output)
+
