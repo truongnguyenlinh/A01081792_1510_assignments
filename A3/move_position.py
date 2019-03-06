@@ -62,10 +62,10 @@ def move_west() -> None:
 def move_east() -> None:
     """Move character East on arbitrary map.
 
-    RETURN None if y coordinate is out of bounds at 4"""
+    RETURN None if y coordinate is out of bounds at 8"""
     opponent_pokemon = random_pokemon()
     current_x_position = get_pokemon()["Position"][0]
-    if (current_x_position + 1) == 4:
+    if (current_x_position + 1) == 8:
         print("You head East out of bounds and step in mud! You go back to your original position, to clean your feet")
         move_character()
         return None
@@ -103,10 +103,10 @@ def move_north() -> None:
 def move_south() -> None:
     """Move character South on arbitrary map.
 
-    RETURN None if y coordinate is out of bounds at 4"""
+    RETURN None if y coordinate is out of bounds at 8"""
     opponent_pokemon = random_pokemon()
     current_y_position = get_pokemon()["Position"][1]
-    if (current_y_position + 1) == 4:
+    if (current_y_position + 1) == 8:
         print("You head South out of bounds and feeling scared. Due to this, you head back to your original position.")
         move_character()
         return None
