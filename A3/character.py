@@ -33,7 +33,7 @@ def character_name() -> str:
 def class_selection() -> str:
     """Obtain selected class from user.
 
-    RETURN selected class from set list.
+    RETURN selected class from set dictionary.
     """
     global pokemon
     class_type = {"1": "Squirtle", "2": "Charmander", "3": "Bulbasaur\n"}
@@ -48,7 +48,7 @@ def class_selection() -> str:
 
 
 def character_information() -> dict:
-    """Store all user input into a list.
+    """Store all user input into a dictionary.
 
     RETURN dictionary of character information
     """
@@ -68,22 +68,32 @@ def character_information() -> dict:
     return pokemon
 
 
-def get_pokemon():
+def get_pokemon() -> dict:
+    """Produce updated global dictionary variable.
+
+    RETURN global character dictionary
+    """
     global pokemon
     user_pokemon = copy.deepcopy(pokemon)
     return user_pokemon
 
 
 def change_hp(change: int):
+    """Change global variable pokemon HP.
+    """
     global pokemon
     pokemon["HP"] += change
 
 
 def change_row(position: int):
+    """Change global variable pokemon row position.
+    """
     global pokemon
     pokemon["Position"][0] += position
 
 
 def change_column(position: int):
+    """Change global variable pokemon column position.
+    """
     global pokemon
     pokemon["Position"][1] += position
