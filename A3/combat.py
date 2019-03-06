@@ -11,18 +11,10 @@ def combat_round(opponent: dict):
     PRECONDITION opponent: must be a well-formed dictionary from random_pokemon
 
     >>> random.seed(3)
-    >>> combat_round({"Name": "Tyson", "Class": "Squirtle", "Position": [0, 0], "HP": 10}, \
-    {'Name': 'Palkia', 'Class': 'Water', 'Attack': 'Pressure', 'HP': 5})
+    >>> combat_round({'Name': 'Palkia', 'Class': 'Water', 'Attack': 'Pressure', 'HP': 5})
     You attacked Palkia with a slap and he took 2 damage.
     Palkia attacked you with Pressure and you took 5 damage.
     You attacked Palkia with a slap and he took 5 damage.
-    Success! Your opponent has fainted and you gained 20 prize dollars from your battle.
-    <BLANKLINE>
-    >>> combat_round({"Name": "Angus", "Class": "Bulbasaur", "Position": [3, 1], "HP": 6}, \
-    {"Name": "Dragonite", "Class": "Dragon", "Attack": "Inner Focus", "HP": 5})
-    You attacked Dragonite with a slap and he took 3 damage.
-    Dragonite attacked you with Inner Focus and you took 5 damage.
-    You attacked Dragonite with a slap and he took 4 damage.
     Success! Your opponent has fainted and you gained 20 prize dollars from your battle.
     <BLANKLINE>
     >>> random.seed()
@@ -58,11 +50,9 @@ def potential_attack(opponent: dict):
     PRECONDITION opponent: must be a well-formed dictionary from random_pokemon
 
     >>> random.seed(31)
-    >>> potential_attack({"Name": "Char", "Class": "Charmander", "Position": [2, 2], "HP": 8}, \
-    {"Name": "Pikachu", "Class": "Electric", "Attack": "Static", "HP": 5})
+    >>> potential_attack({"Name": "Pikachu", "Class": "Electric", "Attack": "Static", "HP": 5})
     Despite fleeing, Pikachu still attacked you! He inflicted you by 4 damage.
-    >>> potential_attack({"Name": "Ben", "Class": "Squirtle", "Position": [1, 0], "HP": 5}, \
-    {"Name": "Pikachu", "Class": "Electric", "Attack": "Static", "HP": 5})
+    >>> potential_attack({"Name": "Pikachu", "Class": "Electric", "Attack": "Static", "HP": 5})
     You fled successfully!
     >>> random.seed()
     """
