@@ -123,7 +123,7 @@ def move_south() -> None:
 def move_character():
     """Obtain user input to determine new position.
     """
-    interactive_map.pokemon_map(get_pokemon())
+    interactive_map.pokemon_map()
     current_position = get_pokemon()["Position"]
     user_direction_input = user_input_type("Position(x, y): %s | HP: %s\nWhere would you like to go? (N/E/S/W)\n"
                                            % (current_position, get_pokemon()["HP"]))
