@@ -120,7 +120,7 @@ def move_south() -> None:
     fight_flee(opponent_pokemon)
 
 
-def move_character():
+def move_character() -> None:
     """Obtain user input to determine new position.
     """
     interactive_map.pokemon_map()
