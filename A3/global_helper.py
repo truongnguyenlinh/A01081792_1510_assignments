@@ -1,5 +1,7 @@
 import random
 import doctest
+import json
+from character import get_pokemon
 
 
 def user_input_type(msg: str) -> str:
@@ -8,6 +10,10 @@ def user_input_type(msg: str) -> str:
     RETURN user input if not quit"""
     user_input = input(msg)
     if user_input.strip().lower() == "quit":
+        print("Thank you for playing!")
+        filename = "character.json"
+        with open(filename, 'w') as file_object:
+            json.dump(get_pokemon(), file_object)
         exit()
     else:
         return user_input
