@@ -1,4 +1,5 @@
 import doctest
+from character import get_pokemon
 
 
 def pokemon_map(pokemon: dict):
@@ -26,8 +27,8 @@ def pokemon_map(pokemon: dict):
                      ["X", "X", "X", "X"],
                      ["X", "X", "X", "X"]]
 
-    pokemon_x = pokemon["Position"][0]
-    pokemon_y = pokemon["Position"][1]
+    pokemon_x = get_pokemon()["Position"][0]
+    pokemon_y = get_pokemon()["Position"][1]
     map_positions[pokemon_y][pokemon_x] = "P"
 
     for row in map_positions:
