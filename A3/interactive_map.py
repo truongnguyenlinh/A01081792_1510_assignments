@@ -4,7 +4,7 @@ import doctest
 def pokemon_map(pokemon: dict):
     """Interpret a square map with user location and available spots.
 
-    PRECONDITION pokemon must be a well-formed dictionary seen in character_information
+    PRECONDITION character must be a well-formed dictionary seen in get_pokemon
     >>> pokemon_map({"Name": "Dave", "Class": "Bulbasaur", "Position": [2, 3], "HP": 10})
     X X X X
     X X X X

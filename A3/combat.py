@@ -4,10 +4,9 @@ from character import change_hp, get_pokemon
 from global_helper import roll_die, user_input_type
 
 
-def combat_round(opponent: dict):
-    """Determine the amount of damage between two opponents.
+def combat_round(opponent: dict) -> None:
+    """Determine the amount of damage between character and opponent.
 
-    PRECONDITION pokemon: must be a well-formed dictionary from character
     PRECONDITION opponent: must be a well-formed dictionary from random_pokemon
 
     >>> random.seed(3)
@@ -43,10 +42,9 @@ def combat_round(opponent: dict):
         return combat_round(opponent)
 
 
-def potential_attack(opponent: dict):
-    """Determine whether opponent will do damage to user.
+def potential_attack(opponent: dict) -> None:
+    """Determine whether opponent will do damage to user when fleeing.
 
-    PRECONDITION pokemon: must be a well-formed dictionary from character
     PRECONDITION opponent: must be a well-formed dictionary from random_pokemon
 
     >>> random.seed(31)
@@ -68,10 +66,9 @@ def potential_attack(opponent: dict):
         print("You fled successfully!")
 
 
-def fight_flee(opponent: dict):
+def fight_flee(opponent: dict) -> None:
     """Determine whether opponent will fight or flee.
 
-    PRECONDITION pokemon: must be a well-formed dictionary from character
     PRECONDITION opponent: must be a well-formed dictionary from random_pokemon
     """
     encounter_percentage = roll_die(1, 10)

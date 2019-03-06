@@ -78,21 +78,21 @@ def get_pokemon() -> dict:
     return user_pokemon
 
 
-def change_hp(change: int):
+def change_hp(change: int) -> None:
     """Change global variable pokemon HP.
     """
     global pokemon
     pokemon["HP"] += change
 
 
-def change_row(position: int):
+def change_row(position: int) -> None:
     """Change global variable pokemon row position.
     """
     global pokemon
     pokemon["Position"][0] += position
 
 
-def change_column(position: int):
+def change_column(position: int) -> None:
     """Change global variable pokemon column position.
     """
     global pokemon
