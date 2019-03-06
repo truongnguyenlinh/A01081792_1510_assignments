@@ -1,8 +1,15 @@
+import copy
+
+
+pokemon = {"Position": [0, 0], "HP": 10}
+
+
 def character_name() -> str:
     """Obtain name input from user.
 
     RETURN string of entered name
     """
+    global pokemon
     name = input("Enter your name, adventurer.\n")
     name = name.title()
     if not name.isalpha():
@@ -17,7 +24,7 @@ def character_name() -> str:
         print("Welcome to the magical Pokemon SUD, %s!\n"
               "Before we begin, you will need to choose your pokemon.\n"
               "From there, the adventure will begin.\n" % name)
-        return name
+        pokemon.update({"Name": name})
     else:
         print("I'm sorry, I didn't quite understand that.")
         return character_name()
@@ -28,12 +35,13 @@ def class_selection() -> str:
 
     RETURN selected class from set list.
     """
+    global pokemon
     class_type = {"1": "Squirtle", "2": "Charmander", "3": "Bulbasaur\n"}
     class_input = input("Enter the corresponding number of your desired Pokemon type:\n"
                         "1. Squirtle\n2. Charmander\n3. Bulbasaur\n")
     class_input = class_input.strip()
     if class_input in class_type.keys():
-        return class_type[class_input]
+        pokemon.update({"Class": class_type[class_input]})
     else:
         print("Please enter a number to choose your Pokemon type!")
         return class_selection()
@@ -44,7 +52,9 @@ def character_information() -> dict:
 
     RETURN dictionary of character information
     """
-    character = {"Name": character_name(), "Class": class_selection(), "Position": [0, 0], "HP": 10}
+    global pokemon
+    character_name()
+    class_selection()
 
     print("Hello, %s the %s! The goal of this world is to roam the regions, defeating all Pokemon encountered.\n"
           "If you encounter a Pokemon, you may flee or flight; however, the battle will be a combat to the death.\n"
@@ -54,5 +64,26 @@ def character_information() -> dict:
           "the same time; keep this in mind moving forward.\n\n"
           "You may only move in directions of North, East, South and West within the constraints of our \n"
           "fantastic world and at any time, enter 'quit' to end the game. Good Luck!\n"
-          % (character["Name"], character["Class"]))
-    return character
+          % (pokemon["Name"], pokemon["Class"]))
+    return pokemon
+
+
+def get_pokemon():
+    global pokemon
+    user_pokemon = copy.deepcopy(pokemon)
+    return user_pokemon
+
+
+def change_hp(change: int):
+    global pokemon
+    pokemon["HP"] += change
+
+
+def change_row(position: int):
+    global pokemon
+    pokemon["Position"][0] += position
+
+
+def change_column(position: int):
+    global pokemon
+    pokemon["Position"][1] += position
