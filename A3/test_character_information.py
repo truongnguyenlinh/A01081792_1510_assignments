@@ -9,6 +9,7 @@ class TestCharacterInformation(TestCase):
     @patch('builtins.input', side_effect=["helios", "y", "3"])
     @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
     def test_character_information(self, mock_stdout, mock_user_input):
+        """Expected value print output when all input is correct."""
         expected_value = "Welcome to the magical Pokemon SUD, Helios!\n"\
                          "Before we begin, you will need to choose your pokemon.\n"\
                          "From there, the adventure will begin.\n\n" \
@@ -30,9 +31,11 @@ class TestCharacterInformation(TestCase):
 
     @patch('builtins.input', side_effect=["Trae", "y", "2"])
     def test_character_information_return(self, mock_user_input):
+        """Global variable is updated with new user input."""
         self.assertEqual(character_information(), {"Name":"Trae", "Class":"Charmander", "Position": [0, 0], "HP": 10})
 
     @patch('builtins.input', side_effect=["ALLEN", "n", "MAY", "y", "1"])
     def test_character_information_len(self, mock_user_input):
+        """Length of global variable is updated from 2 to 4."""
         self.assertEqual(len(character_information()), 4)
 
