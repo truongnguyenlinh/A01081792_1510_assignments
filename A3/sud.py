@@ -12,10 +12,10 @@ def main():
     print("[]     \   \                       '-_/’-‘--,- ---,, __,,-`         []")
     print("======================================================================")
 
-    pokemon = character.character_information()
+    character.get_pokemon()
 
-    while pokemon["HP"] > 0:
-        move_position.move_character(pokemon)
+    while character.get_pokemon()["HP"] > 0:
+        move_position.move_character()
 
 
 if __name__ == '__main__':
