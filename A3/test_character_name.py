@@ -1,5 +1,5 @@
 from unittest import TestCase
-from character import character_name
+from character import character_name, pokemon
 from unittest.mock import patch
 import unittest
 import io
@@ -24,3 +24,8 @@ class TestCharacterName(TestCase):
                           "From there, the adventure will begin.\n\n"
         character_name()
         self.assertEqual(mock_stdout.getvalue(), expected_output)
+
+    @patch('builtins.input', side_effect=["MoRtY", "y"])
+    def test_character_name_global_variable(self, mock_user_input):
+        self.assertEqual(character_name(), pokemon)
+

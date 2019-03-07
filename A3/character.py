@@ -25,7 +25,8 @@ def character_name() -> str:
         print("Welcome to the magical Pokemon SUD, %s!\n"
               "Before we begin, you will need to choose your pokemon.\n"
               "From there, the adventure will begin.\n" % name)
-        return pokemon.update({"Name": name})
+        pokemon.update({"Name": name})
+        return pokemon
     else:
         print("I'm sorry, I didn't quite understand that.")
         return character_name()
@@ -42,7 +43,8 @@ def class_selection() -> str:
                         "1. Squirtle\n2. Charmander\n3. Bulbasaur\n")
     class_input = class_input.strip()
     if class_input in class_type.keys():
-        return pokemon.update({"Class": class_type[class_input]})
+        pokemon.update({"Class": class_type[class_input]})
+        return pokemon
     else:
         print("Please enter a number to choose your Pokemon type!")
         return class_selection()

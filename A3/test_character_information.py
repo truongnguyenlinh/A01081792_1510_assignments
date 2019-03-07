@@ -29,7 +29,7 @@ class TestCharacterInformation(TestCase):
         character_information()
         self.assertEqual(mock_stdout.getvalue(), expected_value)
 
-    @patch('builtins.input', side_effect=["Trae", "y", "2"])
+    @patch('builtins.input', side_effect=["TraE", "y", "2"])
     def test_character_information_return(self, mock_user_input):
         """Global variable is updated with new user input."""
         self.assertEqual(character_information(), {"Name":"Trae", "Class":"Charmander", "Position": [0, 0], "HP": 10})
@@ -43,4 +43,3 @@ class TestCharacterInformation(TestCase):
     def test_character_information_same_global(self, mock_user_input):
         """User input is updated in global variable."""
         self.assertEqual(character_information(), pokemon)
-
