@@ -48,9 +48,9 @@ def move_west() -> None:
     """Move character West on arbitrary map.
 
     RETURN None if y coordinate is out of bounds at -1"""
-    current_x_position = get_pokemon()["Position"][0]
+    current_row_position = get_pokemon()["Position"][0]
     opponent_pokemon = random_pokemon()
-    if (current_x_position - 1) == -1:
+    if (current_row_position - 1) == -1:
         print("You head West out of bounds and feeling scared. Due to this, you head back to your original position.")
         move_character()
         return None
@@ -69,8 +69,8 @@ def move_east() -> None:
 
     RETURN None if y coordinate is out of bounds at 8"""
     opponent_pokemon = random_pokemon()
-    current_x_position = get_pokemon()["Position"][0]
-    if (current_x_position + 1) == 8:
+    current_row_position = get_pokemon()["Position"][0]
+    if (current_row_position + 1) == 8:
         print("You head East out of bounds and step in mud! You go back to your original position, to clean your feet")
         move_character()
         return None
@@ -89,8 +89,8 @@ def move_north() -> None:
 
     RETURN None if y coordinate is out of bounds at -1"""
     opponent_pokemon = random_pokemon()
-    current_y_position = get_pokemon()["Position"][1]
-    if (current_y_position - 1) == -1:
+    current_column_position = get_pokemon()["Position"][1]
+    if (current_column_position - 1) == -1:
         print("You head North out of bounds and find a bush of berries. Unfortunately, they're poisonous and "
               "make you sick. Due to this, you head back to your original position.")
         move_character()
@@ -110,8 +110,8 @@ def move_south() -> None:
 
     RETURN None if y coordinate is out of bounds at 8"""
     opponent_pokemon = random_pokemon()
-    current_y_position = get_pokemon()["Position"][1]
-    if (current_y_position + 1) == 8:
+    current_column_position = get_pokemon()["Position"][1]
+    if (current_column_position + 1) == 8:
         print("You head South out of bounds and feeling scared. Due to this, you head back to your original position.")
         move_character()
         return None

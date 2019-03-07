@@ -24,9 +24,9 @@ def pokemon_map():
     """
     map_positions = [["X" for i in range(8)] for x in range(8)]
 
-    pokemon_x = get_pokemon()["Position"][0]
-    pokemon_y = get_pokemon()["Position"][1]
-    map_positions[pokemon_y][pokemon_x] = "P"
+    pokemon_row = get_pokemon()["Position"][0]
+    pokemon_column = get_pokemon()["Position"][1]
+    map_positions[pokemon_column][pokemon_row] = "P"
 
     for row in map_positions:
         print("  ".join(row))
