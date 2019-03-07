@@ -4,6 +4,17 @@ import json
 from character import get_pokemon
 
 
+def save_character(character: dict) -> None:
+    """Save user character information into a JSON file.
+
+    PARAM character must be a well formed dictionary seen in character_information
+    """
+
+    filename = "character.json"
+    with open(filename, 'w') as file_object:
+        json.dump(character, file_object)
+
+
 def user_input_type(msg: str) -> str:
     """End program if user input is quit.
 
@@ -11,9 +22,7 @@ def user_input_type(msg: str) -> str:
     user_input = input(msg)
     if user_input.strip().lower() == "quit":
         print("Thank you for playing!")
-        filename = "character.json"
-        with open(filename, 'w') as file_object:
-            json.dump(get_pokemon(), file_object)
+        save_character(get_pokemon())
         exit()
     else:
         return user_input
