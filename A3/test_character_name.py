@@ -28,4 +28,3 @@ class TestCharacterName(TestCase):
     @patch('builtins.input', side_effect=["MoRtY", "y"])
     def test_character_name_global_variable(self, mock_user_input):
         self.assertEqual(character_name(), pokemon)
-
