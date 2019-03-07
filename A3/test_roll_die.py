@@ -1,3 +1,8 @@
+# Linh Truong
+# A01081792
+# 03/06/2019
+
+
 from unittest import TestCase
 from global_helper import roll_die
 import random

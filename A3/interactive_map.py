@@ -1,3 +1,8 @@
+# Linh Truong
+# A01081792
+# 03/06/2019
+
+
 import doctest
 from character import get_pokemon
 
