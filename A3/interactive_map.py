@@ -22,11 +22,11 @@ def pokemon_map():
     X  X  X  X  X  X  X  X
     X  X  X  X  X  X  X  X
     """
-    map_positions = [["X" for i in range(8)] for x in range(8)]
+    map_positions = [["🌲" for i in range(8)] for x in range(8)]
 
     pokemon_row = get_pokemon()["Position"][0]
     pokemon_column = get_pokemon()["Position"][1]
-    map_positions[pokemon_column][pokemon_row] = "P"
+    map_positions[pokemon_column][pokemon_row] = "🐱"
 
     for row in map_positions:
         print("  ".join(row))
