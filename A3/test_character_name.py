@@ -33,3 +33,16 @@ class TestCharacterName(TestCase):
     @patch('builtins.input', side_effect=["MoRtY", "y"])
     def test_character_name_global_variable(self, mock_user_input):
         self.assertEqual(character_name(), pokemon)
+
+    @patch('builtins.input', side_effect=["AllEN", "Y"])
+    def test_character_name_global_variable_len(self, mock_user_input):
+        self.assertEqual(len(character_name()), 3)
+
+    @patch('builtins.input', side_effect=["pikachu", "n", "will", "n", "ben", "y"])
+    def test_character_name_global_variable_output(self, mock_user_input):
+        self.assertEqual(character_name(), {'Name': 'Ben', 'Position': [0, 0], 'HP': 10})
+
+    @patch('builtins.input', side_effect=["g", "n", "darsale", "Y"])
+    def test_character_name_global_equal(self, mock_user_input):
+        character_name()
+        self.assertEqual({'Name': 'Darsale', 'Position': [0, 0], 'HP': 10}, pokemon)
