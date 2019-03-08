@@ -10,6 +10,7 @@ import io
 class TestEncounterPercentage(TestCase):
     @patch('builtins.input', side_effect=["Fight"])
     def test_encounter_percentage_fight(self, mock_user_input):
+        """Test for HP change after completed combat."""
         random.seed(31)
         encounter_percentage({"Name": "Egg", "Attack": "Punch", "HP": 5})
         self.assertEqual(get_hp(), 9)
@@ -18,6 +19,7 @@ class TestEncounterPercentage(TestCase):
     @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
     @patch('builtins.input', side_effect=["Flee"])
     def test_encounter_percentage_output(self, mock_user_input, mock_stdout):
+        """Test for expected output dependent on user input of "Flee"."""
         random.seed(19)
         opponent = {"Name": "Palkia", "Class": "Water", "Attack": "Pressure", "HP": 5}
         expected_value = "You encountered another Pokemon!\nYou fled successfully!\n"
@@ -28,6 +30,7 @@ class TestEncounterPercentage(TestCase):
     @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
     @patch('builtins.input', side_effect=["Fight"])
     def test_encounter_percentage_output(self, mock_user_input, mock_stdout):
+        """Test for expected output dependent on user input of "Fight"."""
         random.seed(19)
         opponent = {"Name": "Marowak", "Class": "Ground", "Attack": "Rock Head", "HP": 5}
         expected_value = "You encountered another Pokemon!\nMarowak | HP: 5 \nYou encountered Marowak! It's time for a "\
@@ -36,4 +39,3 @@ class TestEncounterPercentage(TestCase):
         encounter_percentage(opponent)
         self.assertEqual(mock_stdout.getvalue(), expected_value)
         random.seed()
-
