@@ -71,13 +71,13 @@ def potential_attack(opponent: dict) -> None:
         print("You fled successfully!")
 
 
-def fight_flee(opponent: dict) -> None:
+def encounter_percentage(opponent: dict) -> None:
     """Determine whether opponent will fight or flee.
 
     PRECONDITION opponent: must be a well-formed dictionary from random_pokemon
     """
-    encounter_percentage = roll_die(1, 10)
-    if encounter_percentage == 1:
+    encounter = roll_die(1, 10)
+    if encounter == 1:
         print("You encountered another Pokemon!")
         user_input = user_input_type("Would you like to fight or flee?\n")
 

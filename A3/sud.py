@@ -6,7 +6,7 @@
 from character import change_hp, change_row, change_column, get_row, get_column, get_hp, character_information
 from global_helper import user_input_type, roll_die
 from pokemon import random_pokemon
-from combat import fight_flee
+from combat import encounter_percentage
 import interactive_map
 import random
 import doctest
@@ -58,7 +58,7 @@ def move_west() -> None:
     else:
         change_row(-1)
         random_message()
-    fight_flee(opponent_pokemon)
+    encounter_percentage(opponent_pokemon)
 
 
 def move_east() -> None:
@@ -75,7 +75,7 @@ def move_east() -> None:
     else:
         change_row(1)
         random_message()
-    fight_flee(opponent_pokemon)
+    encounter_percentage(opponent_pokemon)
 
 
 def move_north() -> None:
@@ -93,7 +93,7 @@ def move_north() -> None:
     else:
         change_column(-1)
         random_message()
-    fight_flee(opponent_pokemon)
+    encounter_percentage(opponent_pokemon)
 
 
 def move_south() -> None:
@@ -110,7 +110,7 @@ def move_south() -> None:
     else:
         change_column(1)
         random_message()
-    fight_flee(opponent_pokemon)
+    encounter_percentage(opponent_pokemon)
 
 
 def move_character() -> None:
