@@ -1,7 +1,7 @@
 from unittest import TestCase
 import unittest.mock
 from combat import potential_attack
-from character import get_pokemon
+from character import get_hp
 import random
 import io
 
@@ -31,11 +31,11 @@ class TestPotentialAttack(TestCase):
         random.seed(43)
         opponent = {'Name': 'Lapras', 'Attack': 'Ice Shard', 'HP': 5}
         potential_attack(opponent)
-        self.assertEqual(get_pokemon()['HP'], 7)
+        self.assertEqual(get_hp(), 7)
 
     def test_potential_attack_fled(self):
         """Determine HP of user after successful flee."""
         random.seed(21)
         opponent = {'Name': 'Scyther', 'Attack': 'Slash', 'HP': 5}
         potential_attack(opponent)
-        self.assertEqual(get_pokemon()['HP'], 10)
+        self.assertEqual(get_hp(), 10)

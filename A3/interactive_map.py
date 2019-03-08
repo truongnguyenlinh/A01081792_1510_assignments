@@ -4,13 +4,11 @@
 
 
 import doctest
-from character import get_pokemon
+from character import get_row, get_column
 
 
 def pokemon_map():
     """Interpret a square map with user location and available spots.
-
-    PRECONDITION character must be a well-formed dictionary seen in get_pokemon
 
     >>> pokemon_map()
     🐱  🌲  🌲  🌲  🌲  🌲  🌲  🌲
@@ -24,8 +22,8 @@ def pokemon_map():
     """
     map_positions = [["🌲" for i in range(8)] for x in range(8)]
 
-    pokemon_row = get_pokemon()["Position"][0]
-    pokemon_column = get_pokemon()["Position"][1]
+    pokemon_row = get_row()
+    pokemon_column = get_column()
     map_positions[pokemon_column][pokemon_row] = "🐱"
 
     for row in map_positions:

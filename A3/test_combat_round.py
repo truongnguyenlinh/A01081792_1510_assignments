@@ -5,7 +5,6 @@
 
 from unittest import TestCase
 from combat import combat_round
-from character import get_pokemon
 import unittest
 from unittest.mock import patch
 import random
@@ -40,10 +39,3 @@ class TestCombatRound(TestCase):
         with self.assertRaises(SystemExit):
             combat_round(opponent)
         random.seed()
-
-    def test_combat_round_global_variable(self):
-        """Determine that global_variable HP is updated after combat."""
-        random.seed(11)
-        opponent = {"Name": "Snorlax", "Attack": "Headbutt", "HP": 5}
-        combat_round(opponent)
-        self.assertEqual(get_pokemon(), {"Position": [0, 0], "HP": 5})

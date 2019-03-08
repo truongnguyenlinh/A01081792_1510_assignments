@@ -4,7 +4,7 @@
 
 
 from unittest import TestCase
-from global_helper import save_character
+from character import save_character
 
 
 class TestSaveCharacter(TestCase):

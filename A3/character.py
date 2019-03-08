@@ -4,7 +4,7 @@
 
 
 import doctest
-import copy
+import json
 
 
 pokemon = {"Position": [0, 0], "HP": 10}
@@ -20,7 +20,7 @@ def character_name() -> str:
     name = name.title()
     if not name.isalpha():
         print("I'm sorry, I don't quite understand!")
-        return character_name()
+        character_name()
 
     confirm_name = input("Did I get that right, %s (Y/N)?\n" % name)
     if confirm_name.strip().upper() == "N":
@@ -31,13 +31,12 @@ def character_name() -> str:
               "Before we begin, you will need to choose your pokemon.\n"
               "From there, the adventure will begin.\n" % name)
         pokemon.update({"Name": name})
-        return pokemon
     else:
         print("I'm sorry, I didn't quite understand that.")
-        return character_name()
+        character_name()
 
 
-def class_selection() -> str:
+def class_selection() -> None:
     """Obtain selected class from user.
 
     RETURN selected class from set dictionary.
@@ -49,13 +48,12 @@ def class_selection() -> str:
     class_input = class_input.strip()
     if class_input in class_type.keys():
         pokemon.update({"Class": class_type[class_input]})
-        return pokemon
     else:
         print("Please enter a number to choose your Pokemon type!")
-        return class_selection()
+        class_selection()
 
 
-def character_information() -> dict:
+def character_information() -> None:
     """Store all user input into a dictionary.
 
     RETURN dictionary of character information
@@ -73,18 +71,31 @@ def character_information() -> dict:
           "You may only move in directions of North, East, South and West within the constraints of our \n"
           "fantastic world and at any time, enter 'quit' to end the game. Good Luck!\n"
           % (pokemon["Name"], pokemon["Class"]))
-    return pokemon
 
 
-def get_pokemon() -> dict:
-    """Produce updated global dictionary variable.
+def get_row():
+    """Obtain current row position from user.
 
-    RETURN global character dictionary
-
-    >>> get_pokemon()
-    {'Position': [0, 0], 'HP': 10}
+    RETURN integer of current row position
     """
-    return pokemon
+    return pokemon["Position"][0]
+
+
+def get_column():
+    """Obtain current column position from user.
+
+    RETURN integer of current column position
+    """
+
+    return pokemon["Position"][1]
+
+
+def get_hp():
+    """Obtain current row position from user.
+
+    RETURN integer of current row position
+    """
+    return pokemon["HP"]
 
 
 def change_hp(change: int) -> None:
@@ -106,6 +117,17 @@ def change_column(position: int) -> None:
     """
     global pokemon
     pokemon["Position"][1] += position
+
+
+def save_character() -> None:
+    """Save user character information into a JSON file.
+
+    PARAM character must be a well formed dictionary seen in character_information
+    """
+    global pokemon
+    filename = "character.json"
+    with open(filename, 'w') as file_object:
+        json.dump(pokemon, file_object)
 
 
 def main():

@@ -5,7 +5,7 @@
 
 import random
 import doctest
-from character import change_hp, get_pokemon
+from character import change_hp, get_hp
 from global_helper import roll_die, user_input_type
 
 
@@ -35,11 +35,11 @@ def combat_round(opponent: dict) -> None:
     if opponent["HP"] <= 0:
         return None
 
-    if get_pokemon()["HP"] > 0:
+    if get_hp() > 0:
         change_hp(-opponent_attack)
         print("%s attacked you with %s and you took %s damage."
               % (opponent["Name"], opponent["Attack"], opponent_attack))
-        if get_pokemon()["HP"] <= 0:
+        if get_hp() <= 0:
             print("You fainted. Try again next time!")
             exit()
 

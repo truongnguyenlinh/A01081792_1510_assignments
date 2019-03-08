@@ -5,18 +5,7 @@
 
 import random
 import doctest
-import json
-from character import get_pokemon
-
-
-def save_character(character: dict) -> None:
-    """Save user character information into a JSON file.
-
-    PARAM character must be a well formed dictionary seen in character_information
-    """
-    filename = "character.json"
-    with open(filename, 'w') as file_object:
-        json.dump(character, file_object)
+from character import save_character
 
 
 def user_input_type(msg: str) -> str:
@@ -27,7 +16,7 @@ def user_input_type(msg: str) -> str:
     user_input = input(msg)
     if user_input.strip().lower() == "quit":
         print("Thank you for playing!")
-        save_character(get_pokemon())
+        save_character()
         exit()
     else:
         return user_input

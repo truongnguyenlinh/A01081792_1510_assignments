@@ -3,7 +3,7 @@
 # 03/06/2019
 
 
-from character import change_hp, change_row, change_column, get_pokemon, character_information
+from character import change_hp, change_row, change_column, get_row, get_column, get_hp, character_information
 from global_helper import user_input_type, roll_die
 from pokemon import random_pokemon
 from combat import fight_flee
@@ -12,7 +12,7 @@ import random
 import doctest
 
 
-def random_message():
+def random_message() -> None:
     """Return random message from predefined list.
 
     RETURN string of random message
@@ -45,16 +45,13 @@ def random_message():
 
 
 def move_west() -> None:
-    """Move character West on arbitrary map.
-
-    RETURN None if y coordinate is out of bounds at -1"""
-    current_row_position = get_pokemon()["Position"][0]
+    """Move character West on arbitrary map."""
+    current_row_position = get_row()
     opponent_pokemon = random_pokemon()
     if (current_row_position - 1) == -1:
         print("You head West out of bounds and feeling scared. Due to this, you head back to your original position.")
         move_character()
-        return None
-    elif get_pokemon()["HP"] < 10:
+    elif get_hp() < 10:
         change_row(-1)
         change_hp(1)
         random_message()
@@ -65,16 +62,13 @@ def move_west() -> None:
 
 
 def move_east() -> None:
-    """Move character East on arbitrary map.
-
-    RETURN None if y coordinate is out of bounds at 8"""
+    """Move character East on arbitrary map."""
     opponent_pokemon = random_pokemon()
-    current_row_position = get_pokemon()["Position"][0]
+    current_row_position = get_row()
     if (current_row_position + 1) == 8:
         print("You head East out of bounds and step in mud! You go back to your original position, to clean your feet")
         move_character()
-        return None
-    elif get_pokemon()["HP"] < 10:
+    elif get_hp() < 10:
         change_row(1)
         change_hp(1)
         random_message()
@@ -85,17 +79,14 @@ def move_east() -> None:
 
 
 def move_north() -> None:
-    """Move character North on arbitrary map.
-
-    RETURN None if y coordinate is out of bounds at -1"""
+    """Move character North on arbitrary map."""
     opponent_pokemon = random_pokemon()
-    current_column_position = get_pokemon()["Position"][1]
+    current_column_position = get_column()
     if (current_column_position - 1) == -1:
         print("You head North out of bounds and find a bush of berries. Unfortunately, they're poisonous and "
               "make you sick. Due to this, you head back to your original position.")
         move_character()
-        return None
-    elif get_pokemon()["HP"] < 10:
+    elif get_hp() < 10:
         change_column(-1)
         change_hp(1)
         random_message()
@@ -106,16 +97,13 @@ def move_north() -> None:
 
 
 def move_south() -> None:
-    """Move character South on arbitrary map.
-
-    RETURN None if y coordinate is out of bounds at 8"""
+    """Move character South on arbitrary map."""
     opponent_pokemon = random_pokemon()
-    current_column_position = get_pokemon()["Position"][1]
+    current_column_position = get_column()
     if (current_column_position + 1) == 8:
         print("You head South out of bounds and feeling scared. Due to this, you head back to your original position.")
         move_character()
-        return None
-    elif get_pokemon()["HP"] < 10:
+    elif get_hp() < 10:
         change_column(1)
         change_hp(1)
         random_message()
@@ -129,9 +117,9 @@ def move_character() -> None:
     """Obtain user input to determine new position.
     """
     interactive_map.pokemon_map()
-    current_position = get_pokemon()["Position"]
+    current_position = [get_row(), get_column()]
     user_direction_input = user_input_type("Position(x, y): %s | HP: %s\nWhere would you like to go? (N/E/S/W)\n"
-                                           % (current_position, get_pokemon()["HP"]))
+                                           % (current_position, get_hp()))
 
     if user_direction_input.strip().upper() == "W":
         move_west()
@@ -159,7 +147,7 @@ def main():
 
     character_information()
 
-    while get_pokemon()["HP"] > 0:
+    while get_hp() > 0:
         move_character()
 
 
