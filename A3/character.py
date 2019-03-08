@@ -84,9 +84,7 @@ def get_pokemon() -> dict:
     >>> get_pokemon()
     {'Position': [0, 0], 'HP': 10}
     """
-    global pokemon
-    user_pokemon = copy.deepcopy(pokemon)
-    return user_pokemon
+    return pokemon
 
 
 def change_hp(change: int) -> None:
