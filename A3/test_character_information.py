@@ -4,7 +4,7 @@
 
 
 from unittest import TestCase
-from character import character_information, pokemon
+from character import character_information, get_pokemon
 from unittest.mock import patch
 import unittest
 import io
@@ -37,7 +37,7 @@ class TestCharacterInformation(TestCase):
     @patch('builtins.input', side_effect=["TraE", "y", "2"])
     def test_character_information_return(self, mock_user_input):
         """Global variable is updated with new user input."""
-        self.assertEqual(character_information(), {"Name":"Trae", "Class":"Charmander", "Position": [0, 0], "HP": 10})
+        self.assertEqual(character_information(), {"Name": "Trae", "Class": "Charmander", "Position": [0, 0], "HP": 10})
 
     @patch('builtins.input', side_effect=["ALLEN", "n", "MAY", "y", "1"])
     def test_character_information_len(self, mock_user_input):
@@ -47,4 +47,4 @@ class TestCharacterInformation(TestCase):
     @patch('builtins.input', side_effect=["TrOyE", "Y", "3"])
     def test_character_information_same_global(self, mock_user_input):
         """User input is updated in global variable."""
-        self.assertEqual(character_information(), pokemon)
+        self.assertEqual(character_information(), get_pokemon())

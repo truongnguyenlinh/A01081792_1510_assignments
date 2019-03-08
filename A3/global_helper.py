@@ -14,7 +14,6 @@ def save_character(character: dict) -> None:
 
     PARAM character must be a well formed dictionary seen in character_information
     """
-
     filename = "character.json"
     with open(filename, 'w') as file_object:
         json.dump(character, file_object)
@@ -23,7 +22,8 @@ def save_character(character: dict) -> None:
 def user_input_type(msg: str) -> str:
     """End program if user input is quit.
 
-    RETURN user input if not quit"""
+    RETURN user input if not quit
+    """
     user_input = input(msg)
     if user_input.strip().lower() == "quit":
         print("Thank you for playing!")
@@ -52,7 +52,6 @@ def roll_die(number_of_rolls: int, number_of_sides: int) -> int:
     3
     >>> random.seed()
     """
-
     if type(number_of_rolls) != int or type(number_of_sides) != int:
         print("Please enter a positive integer")
     elif number_of_rolls == 0 or number_of_sides == 0:

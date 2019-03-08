@@ -13,14 +13,14 @@ def pokemon_map():
     PRECONDITION character must be a well-formed dictionary seen in get_pokemon
 
     >>> pokemon_map()
-    P  X  X  X  X  X  X  X
-    X  X  X  X  X  X  X  X
-    X  X  X  X  X  X  X  X
-    X  X  X  X  X  X  X  X
-    X  X  X  X  X  X  X  X
-    X  X  X  X  X  X  X  X
-    X  X  X  X  X  X  X  X
-    X  X  X  X  X  X  X  X
+    🐱  🌲  🌲  🌲  🌲  🌲  🌲  🌲
+    🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲
+    🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲
+    🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲
+    🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲
+    🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲
+    🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲
+    🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲
     """
     map_positions = [["🌲" for i in range(8)] for x in range(8)]
 
