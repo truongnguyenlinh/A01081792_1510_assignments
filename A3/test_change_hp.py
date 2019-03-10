@@ -4,11 +4,19 @@
 
 
 from unittest import TestCase
-from character import change_hp, get_hp
+from character import change_hp, pokemon
 
 
 class TestChangeHp(TestCase):
-    def test_change_hp(self):
+    def setUp(self):
+        pokemon["HP"] = 10
+
+    def test_change_hp_subtract(self):
         """Return new global variable HP value."""
         change_hp(-1)
-        self.assertEqual(get_hp(), 9)
+        self.assertEqual(pokemon["HP"], 9)
+
+    def test_change_hp_add(self):
+        """Return new global variable HP value."""
+        change_hp(1)
+        self.assertEqual(pokemon["HP"], 11)
