@@ -4,6 +4,7 @@ from character import get_row, pokemon
 
 class TestGetRow(TestCase):
     def setUp(self):
+        """Assert that global variable pokemon row position is setup for unit testing."""
         pokemon['Position'][0] = 7
 
     def test_get_row_output(self):

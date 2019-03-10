@@ -4,16 +4,20 @@
 
 
 from unittest import TestCase
-from character import change_row, get_row
+from character import change_row, get_row, pokemon
 
 
 class TestChangeRow(TestCase):
+    def setUp(self):
+        """Assert that global variable pokemon row position is setup for unit testing."""
+        pokemon['Position'][0] = 0
+
     def test_change_row_add(self):
-        """Add 1 to users current row position."""
+        """Assert that users current row position is added by 1."""
         change_row(1)
-        self.assertEqual(get_row()['Position'][0], 1)
+        self.assertEqual(get_row(), 1)
 
     def test_change_row_subtract(self):
-        """Subtract 1 to users current row position."""
+        """Assert that users current row position is subtracted by 1."""
         change_row(-1)
-        self.assertEqual(get_row()['Position'][0], 0)
+        self.assertEqual(get_row(), -1)

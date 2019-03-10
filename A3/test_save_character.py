@@ -11,7 +11,7 @@ import os
 
 class TestSaveCharacter(TestCase):
     def setUp(self):
-        """Global variable pokemon setup for unit testing."""
+        """Assert that global variable pokemon setup for unit testing."""
         character.pokemon = {"Name": "Tyson", "Class": "Bulbasaur", "Position": [0, 3], "HP": 7}
 
     def test_save_character_file_exists(self):

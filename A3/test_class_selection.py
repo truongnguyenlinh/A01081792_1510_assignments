@@ -12,6 +12,7 @@ import io
 
 class TestClassSelection(TestCase):
     def setUp(self):
+        """Assert that global variable pokemon name is setup for unit testing."""
         pokemon["Name"] = "Dave"
 
     @patch('builtins.input', side_effect=["Y", "2"])
