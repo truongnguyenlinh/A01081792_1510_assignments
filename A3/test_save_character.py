@@ -4,14 +4,22 @@
 
 
 from unittest import TestCase
-from character import save_character
+import character
+import json
+import os
 
 
 class TestSaveCharacter(TestCase):
-    def test_save_character(self):
-        self.fail()
+    def setUp(self):
+        """Global variable pokemon setup for unit testing."""
+        character.pokemon = {"Name": "Tyson", "Class": "Bulbasaur", "Position": [0, 3], "HP": 7}
 
+    def test_save_character_file_exists(self):
+        """Assert that file exists."""
+        self.assertTrue(os.path.isfile('./character.json'))
 
-# assert file exists
-# assert successful read
-# assert that contents are the same from character
+    def test_save_character_read(self):
+        """Assert contents are the same and are readable."""
+        with open('character.json') as file_object:
+            file_info = json.load(file_object)
+        self.assertEqual(file_info, character.pokemon)
