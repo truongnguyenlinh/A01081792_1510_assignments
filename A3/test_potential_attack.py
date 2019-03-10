@@ -1,15 +1,21 @@
 from unittest import TestCase
 import unittest.mock
 from combat import potential_attack
-from character import get_hp
+from character import get_hp, pokemon
 import random
 import io
 
 
 class TestPotentialAttack(TestCase):
+    def setUp(self):
+        pokemon['Name'] = 'Kanye'
+        pokemon['Class'] = 'Squirtle'
+        pokemon['Position'] = [7, 3]
+        pokemon['HP'] = 7
+
     @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
     def test_potential_attack_output(self, mock_stdout):
-        """Determine if user successfully flees."""
+        """Assert that user successfully flees."""
         random.seed(13)
         opponent = {'Name': 'Horsea', 'Attack': 'Bubble Beam', 'HP': 5}
         potential_attack(opponent)
@@ -18,7 +24,7 @@ class TestPotentialAttack(TestCase):
 
     @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
     def test_potential_attack_second_output(self, mock_stdout):
-        """Determine if user is attacked by opponent."""
+        """Assert that user is attacked by opponent."""
         random.seed(2)
         opponent = {'Name': 'Jynx', 'Attack': 'Ice Punch', 'HP': 5}
         expected_output = "Despite fleeing, Jynx still attacked you! He inflicted you by 1 damage.\n"
@@ -27,15 +33,25 @@ class TestPotentialAttack(TestCase):
         random.seed()
 
     def test_potential_attack_hp(self):
-        """Determine HP of user after damage."""
+        """Assert users HP after damage."""
         random.seed(43)
         opponent = {'Name': 'Lapras', 'Attack': 'Ice Shard', 'HP': 5}
         potential_attack(opponent)
-        self.assertEqual(get_hp(), 7)
+        self.assertEqual(get_hp(), 4)
+        random.seed()
 
     def test_potential_attack_fled(self):
-        """Determine HP of user after successful flee."""
+        """Assert HP of user after successful flee."""
         random.seed(21)
         opponent = {'Name': 'Scyther', 'Attack': 'Slash', 'HP': 5}
         potential_attack(opponent)
-        self.assertEqual(get_hp(), 10)
+        self.assertEqual(get_hp(), 7)
+        random.seed()
+
+    def test_potential_attack_global(self):
+        """Assert that users HP is updated in global variable."""
+        random.seed(57)
+        opponent = {'Name': 'Pikachu', 'Attack': 'Thunderbolt', 'HP': 5}
+        potential_attack(opponent)
+        self.assertEqual(pokemon, {'Name': 'Kanye', 'Class': 'Squirtle', 'Position': [7, 3], 'HP': 4})
+        random.seed()
