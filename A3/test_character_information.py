@@ -4,7 +4,7 @@
 
 
 from unittest import TestCase
-from character import character_information
+from character import character_information, pokemon
 from unittest.mock import patch
 import unittest
 import io
@@ -33,3 +33,9 @@ class TestCharacterInformation(TestCase):
                          "fantastic world and at any time, enter 'quit' to end the game. Good Luck!\n\n"
         character_information()
         self.assertEqual(mock_stdout.getvalue(), expected_value)
+
+    @patch('builtins.input', side_effect=["basil", "y", "1"])
+    def test_character_information_global(self, mock_user_input):
+        """Assert that global variable is updated after obtaining user input."""
+        character_information()
+        self.assertEqual(pokemon, {'Name': 'Basil', 'Class': 'Squirtle', 'Position': [0, 0], 'HP': 10})
