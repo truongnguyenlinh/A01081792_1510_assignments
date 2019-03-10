@@ -1,12 +1,15 @@
 from unittest import TestCase
-from character import get_row
+from character import get_row, pokemon
 
 
 class TestGetRow(TestCase):
+    def setUp(self):
+        pokemon['Position'][0] = 7
+
     def test_get_row_output(self):
-        """Obtain users most updated position"""
-        self.assertEqual(get_row(), 0)
+        """Assert users most updated position"""
+        self.assertEqual(get_row(), 7)
 
     def test_get_row_type(self):
-        """Determine if row position is an int."""
+        """Assert that row position is an int."""
         self.assertEqual(type(get_row()), int)
