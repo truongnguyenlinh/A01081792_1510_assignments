@@ -8,7 +8,7 @@ import io
 class TestRandomMessage(TestCase):
     @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
     def test_random_message_output(self, mock_stdout):
-        """Determine random string."""
+        """Assert random string output."""
         random.seed(4)
         expected_value = "Looks like there's something shiny behind a tree. "\
                          "You head towards the tree and find a Big Pearl.\n"\
@@ -19,7 +19,7 @@ class TestRandomMessage(TestCase):
 
     @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
     def test_random_message_random(self, mock_stdout):
-        """Determine random output."""
+        """Assert random string output."""
         random.seed(1)
         expected_value = "After stepping out of the grass, you find some Gooey Mulch.\nAlthough a maniac would " \
                          "buy this to use as fertilizer on a Berry Crop, you decide not to pick it up.\n"
