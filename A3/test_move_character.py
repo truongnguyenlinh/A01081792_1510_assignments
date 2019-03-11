@@ -2,6 +2,9 @@ from character import pokemon, get_row, get_column, get_hp
 from unittest import TestCase
 from sud import move_character
 from unittest.mock import patch
+import io
+import random
+import unittest
 
 
 class TestMoveCharacter(TestCase):
@@ -36,6 +39,50 @@ class TestMoveCharacter(TestCase):
 
     @patch('builtins.input', side_effect=['h', 'u', 'w'])
     def test_move_character_hp(self, mock_user_input):
-        """Assert that HP will only increase by one if HP is less than 10."""
+        """Assert that HP will increase by one if HP is less than 10."""
         move_character()
         self.assertEqual(get_hp(), 9)
+
+    @patch('builtins.input', side_effect=['e', 'w'])
+    @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
+    def test_move_character_boundary_output(self, mock_stdout, mock_user_input):
+        """Assert expected print output if user it out of bounds."""
+        random.seed(3)
+        pokemon['Position'][0] = 7
+        expected_output = '🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲\n' \
+                          '🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲\n' \
+                          '🌲  🌲  🌲  🌲  🌲  🌲  🌲  🐱\n' \
+                          '🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲\n' \
+                          '🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲\n' \
+                          '🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲\n' \
+                          '🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲\n' \
+                          '🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲\n' \
+                          'You head East out of bounds and step in mud! '\
+                          'You go back to your original position, to clean your feet\n' \
+                          '🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲\n' \
+                          '🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲\n' \
+                          '🌲  🌲  🌲  🌲  🌲  🌲  🌲  🐱\n' \
+                          '🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲\n' \
+                          '🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲\n' \
+                          '🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲\n' \
+                          '🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲\n' \
+                          '🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲\n' \
+                          'You head towards the grass and continue on your path.\n'
+        move_character()
+        self.assertEqual(mock_stdout.getvalue(), expected_output)
+        random.seed()
+
+    @patch('builtins.input', side_effect=['e', 'w'])
+    def test_move_character_row_boundary(self, mock_user_input):
+        """Assert that character cannot move out of bounds and select a different direction."""
+        pokemon['Position'][0] = 7
+        expected_output = 6
+        move_character()
+        self.assertEqual(get_row(), expected_output)
+
+    @patch('builtins.input', side_effect=['n', 'e', 'w'])
+    def test_move_character_hp_max(self, mock_user_input):
+        """Assert that HP will not increase if at 10."""
+        pokemon['HP'] = 10
+        move_character()
+        self.assertEqual(get_hp(), 10)
