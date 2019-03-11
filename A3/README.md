@@ -3,14 +3,14 @@
 - [Pokemon Ruby and Sapphire](https://en.wikipedia.org/wiki/Pok%C3%A9mon_Ruby_and_Sapphire) must knows.
 - [Meowth Information](https://en.wikipedia.org/wiki/Meowth) from Wikipedia.
 
-###What are Pokemon?
+### What are Pokemon?
 Pokemon are creatures of different shapes and sizes who 
 live alongside humans. They typically do not speak English and communicate
 by uttering their names; however, there are some exceptions (Example: Meowth can speak English). 
 Throughout the years, Pokemon have been raised by their owners (also known as Trainers) to evolve 
 and grow into stronger Pokemon.
 
-###Pokemon in Assignment 3
+### Pokemon in Assignment 3
 I have based my assignment on Pokemon, after having played it for over 10 years.
 In particular, this assignment is based off Pokemon Ruby - a variation where the user 
 begins in a specific region. Ultimately, the goal of this game is to defeat all 
