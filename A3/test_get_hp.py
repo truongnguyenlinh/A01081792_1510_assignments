@@ -8,9 +8,9 @@ class TestGetHp(TestCase):
         pokemon['HP'] = 9
 
     def test_get_hp_output(self):
-        """Determine users most updated HP."""
+        """Assert users most updated HP."""
         self.assertEqual(get_hp(), 9)
 
     def test_get_hp_type(self):
-        """Determine if user HP is an int."""
+        """Assert that users HP is an int."""
         self.assertEqual(type(get_hp()), int)
