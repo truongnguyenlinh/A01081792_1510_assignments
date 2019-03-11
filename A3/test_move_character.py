@@ -82,7 +82,14 @@ class TestMoveCharacter(TestCase):
 
     @patch('builtins.input', side_effect=['n', 'e', 'w'])
     def test_move_character_hp_max(self, mock_user_input):
-        """Assert that HP will not increase if at 10."""
+        """Assert that HP will not be greater than 10."""
         pokemon['HP'] = 10
         move_character()
         self.assertEqual(get_hp(), 10)
+
+    @patch('builtins.input', side_effect=['n', 's'])
+    def test_move_character_column_boundary(self, mock_user_input):
+        """Assert that character column position cannot move out of bounds and user must select different direction"""
+        pokemon['Position'][1] = 0
+        move_character()
+        self.assertEqual(get_column(), 1)
