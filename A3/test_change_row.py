@@ -21,3 +21,8 @@ class TestChangeRow(TestCase):
         """Assert that users current row position is subtracted by 1."""
         change_row(-1)
         self.assertEqual(get_row(), -1)
+
+    def test_change_row_add_two(self):
+        """Assert that users row position is added by 2."""
+        change_row(2)
+        self.assertEqual(get_row(), 2)

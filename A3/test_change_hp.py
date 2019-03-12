@@ -21,3 +21,8 @@ class TestChangeHp(TestCase):
         """Assert new global variable HP value."""
         change_hp(1)
         self.assertEqual(pokemon["HP"], 11)
+
+    def test_change_hp_add_2(self):
+        """Assert new global variable is subtracted by 2."""
+        change_hp(-2)
+        self.assertEqual(pokemon["HP"], 8)
