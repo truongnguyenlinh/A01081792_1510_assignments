@@ -91,5 +91,12 @@ class TestMoveCharacter(TestCase):
     def test_move_character_column_boundary(self, mock_user_input):
         """Assert that character column position cannot move out of bounds and user must select different direction"""
         pokemon['Position'][1] = 0
+        expected_output = 1
         move_character()
-        self.assertEqual(get_column(), 1)
+        self.assertEqual(get_column(), expected_output)
+
+    @patch('builtins.input', side_effect=["Quit"])
+    def test_user_input_type_quit_lower(self, mock_user_input):
+        """Assert SystemExit is raised when input is Quit."""
+        with self.assertRaises(SystemExit):
+            move_character()

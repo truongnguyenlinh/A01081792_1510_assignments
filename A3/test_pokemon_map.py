@@ -13,13 +13,13 @@ from interactive_map import pokemon_map
 class TestPokemonMap(TestCase):
     @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
     def test_pokemon_map_output_type(self, mock_stdout):
-        """Determine whether output is a string."""
+        """Assert that output is a string."""
         pokemon_map()
         self.assertEqual(type(mock_stdout.getvalue()), str)
 
     @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
     def test_pokemon_map_output(self, mock_stdout):
-        """Determine printed output from given character."""
+        """Assert printed output from given character."""
         expected_output = "🐱  🌲  🌲  🌲  🌲  🌲  🌲  🌲\n"\
                           "🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲\n"\
                           "🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲\n"\
