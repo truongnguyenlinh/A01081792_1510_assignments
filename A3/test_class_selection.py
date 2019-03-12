@@ -36,7 +36,13 @@ class TestClassSelection(TestCase):
         self.assertEqual(pokemon, {'Name': 'Dave', 'Class': 'Charmander', 'Position': [0, 0], 'HP': 10})
 
     @patch('builtins.input', side_effect=["3"])
-    def test_class_selection_global_thid(self, mock_user_input):
+    def test_class_selection_global_third(self, mock_user_input):
         """Assert that class selection is updated in character global variable."""
         class_selection()
         self.assertEqual(pokemon, {'Name': 'Dave', 'Class': 'Bulbasaur\n', 'Position': [0, 0], 'HP': 10})
+
+    @patch('builtins.input', side_effect=[3])
+    def test_class_selection_error(self, mock_user_input):
+        """Assert an AttributeError with an int."""
+        with self.assertRaises(AttributeError):
+            class_selection()
