@@ -77,6 +77,9 @@ def get_row():
     """Obtain current row position from user.
 
     RETURN integer of current row position
+
+    >>> get_row()
+    0
     """
     return pokemon["Position"][0]
 
@@ -85,6 +88,9 @@ def get_column():
     """Obtain current column position from user.
 
     RETURN integer of current column position
+
+    >>> get_column()
+    0
     """
 
     return pokemon["Position"][1]
@@ -94,6 +100,9 @@ def get_hp():
     """Obtain current row position from user.
 
     RETURN integer of current row position
+
+    >>> get_hp()
+    10
     """
     return pokemon["HP"]
 
