@@ -7,7 +7,7 @@ class Student:
             self.first_name = f_name.title()
             self.last_name = l_name.title()
 
-        if not ((student_num[0] == "A" or student_num[0] == "a") and student_num[1:].isdigit() and len(student_num) == 9):
+        if not (student_num[0].upper() == "A" and student_num[1:].isdigit() and len(student_num) == 9):
             raise ValueError("Enter a nine character student number beginning in 'A' and remaining values as digits.")
         else:
             self.id = student_num.title()
