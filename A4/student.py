@@ -1,6 +1,6 @@
 class Student:
 
-    def __init__(self, f_name: str, l_name: str, student_num: str, status: bool):
+    def __init__(self, f_name: str, l_name: str, student_num: str, status: str):
         if not (f_name.isalpha() and l_name.isalpha()):
             raise ValueError("Please enter a first and last name with alphabetic characters!")
         else:
@@ -11,8 +11,17 @@ class Student:
             raise ValueError("Enter a nine character student number beginning in 'A' and remaining values as digits.")
         else:
             self.id = student_num.title()
-        self.final_grades = []
+        self.standing = self.confirm_standing(status)
         self.status = status
+        self.final_grades = []
+
+    def confirm_standing(self, status: str):
+        if status.strip() == "in-good-standing":
+            return True
+        elif status.strip() == "academic probation":
+            return False
+        else:
+            raise ValueError("Please enter whether the student is 'in-good-standing' or on 'academic probation'.")
 
     def gather_grades(self):
         grades = input("Please enter your grade in percentages in the following format:\nGrade1 Grade2 Grade3 ...")
@@ -30,14 +39,11 @@ class Student:
         return self.status
 
     def print_info(self):
-        print(self.first_name, self.last_name, self.id, self.status, self.final_grades)
-
-
-# validate user_input in the class
+        print(self.first_name, self.last_name, self.id, self.status, self.standing, self.final_grades)
 
 
 def main():
-    student_one = Student("angus", "mundy", "a01081792", True)
+    student_one = Student("angus", "mundy", "a01081792", "in-good-standing")
     student_one.print_info()
     student_one.gather_grades()
     student_one.print_info()
