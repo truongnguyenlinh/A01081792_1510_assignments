@@ -16,8 +16,9 @@ def add_student():
     """Obtain user input to generate a Student instance."""
     first_name = input("Enter the student's first name.")
     last_name = input("Enter the student's last name.")
-    student_num = input("Enter the student's id number.")
+    student_num = input("Enter the student's id number.\n")
     student_instance = student.Student(first_name, last_name, student_num, confirm_standing())
+    file_write(student_instance)
 
 
 def file_write(student_object: object):
@@ -56,7 +57,7 @@ def user_selection(user_input: str):
 
     PRECONDITION: user_input must be an int."""
     if user_input == "1":
-        pass
+        add_student()
     # add student to students.txt
     elif user_input == "2":
         pass
@@ -70,7 +71,7 @@ def user_selection(user_input: str):
     elif user_input == "5":
         quit()
     else:
-        print("Please enter a valid value!\n")
+        print("Please enter a valid action!\n")
 
 
 def main():
