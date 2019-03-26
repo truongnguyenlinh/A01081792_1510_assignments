@@ -1,7 +1,7 @@
 import student
 
 
-def confirm_standing():
+def obtain_standing():
     """Confirm student's current standing."""
     input_standing = input("Is the student in good standing (Y/N)?")
     if input_standing.strip().upper() == "Y":
@@ -17,8 +17,8 @@ def add_student():
     first_name = input("Enter the student's first name.")
     last_name = input("Enter the student's last name.")
     student_num = input("Enter the student's id number.\n")
-    student_instance = student.Student(first_name, last_name, student_num, confirm_standing())
-    file_write(student_instance)
+    student_instance = student.Student(first_name, last_name, student_num, obtain_standing())
+    file_write(student_instance.return_info())
 
 
 def file_write(student_object: object):
@@ -29,27 +29,22 @@ def file_write(student_object: object):
     filename = "students.txt"
     with open(filename, "a") as file_object:
         try:
-            file_object.write(str(student_object) + "n")
+            file_object.write(str(student_object))
+            file_object.write("\n")
             return True
-        except AttributeError: #some type of error
+        except FileNotFoundError:
             return False
 
 
-def file_read():
-    """Create Student object from each record in file."""
-    student_list = []
-    file_object = open("students.txt", "r")
-    for line in file_object:
-        line.split()
-        first_name = line[0]
-        last_name = line[1]
-        student_num = line[3]
-        student_standing = line[4]
-        grades = line[4:]
-        student_instance = student.Student(first_name, last_name, student_num, student_standing)
-        student_instance.get_final_grades().append(grades)
-        student_list.append(student_instance)
-    return student_list
+def del_student():
+    """Delete a Student from students.txt given their student number."""
+    student_num_del = input("Enter the student number of the student you would like to remove.")
+    with open("students.txt", "r") as file_obj:
+        lines = file_obj.readlines()
+        with open("students.txt", "w") as file_object:
+            for line in lines:
+                if student_num_del.strip().upper() not in line:
+                    file_object.write(line)
 
 
 def user_selection(user_input: str):
@@ -58,10 +53,8 @@ def user_selection(user_input: str):
     PRECONDITION: user_input must be an int."""
     if user_input == "1":
         add_student()
-    # add student to students.txt
     elif user_input == "2":
-        pass
-    # delete student from students.txt
+        del_student()
     elif user_input == "3":
         pass
     # calculate class average

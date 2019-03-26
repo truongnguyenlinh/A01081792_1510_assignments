@@ -11,17 +11,20 @@ class Student:
             raise ValueError("Enter a nine character student number beginning in 'A' and remaining values as digits.")
         else:
             self.id = student_num.upper()
-        self.status = None
-        self.confirm_standing(status)
+        self.status = status
+        self.confirm_standing()
         self.final_grades = []
 
-    def confirm_standing(self, status: bool):
-        if status is True:
+    def confirm_standing(self):
+        if self.status is True:
             self.status = "in-good-standing"
-        elif status is False:
+        elif self.status is False:
             self.status = "academic probation"
         else:
             raise ValueError("Please enter whether the student is 'in-good-standing' or on 'academic probation'.")
+
+    def get_standing(self):
+        return self.status
 
     def get_final_grades(self):
         return self.final_grades
