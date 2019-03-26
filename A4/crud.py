@@ -39,18 +39,17 @@ def file_write(student_object: object):
 def del_student():
     """Delete a Student from students.txt given their student number."""
     student_num_del = input("Enter the student number of the student you would like to remove.")
-    with open("students.txt", "r") as file_obj:
+    with open("students.txt", "r+") as file_obj:
         lines = file_obj.readlines()
-        with open("students.txt", "w") as file_object:
-            for line in lines:
-                if student_num_del.strip().upper() not in line:
-                    file_object.write(line)
+        file_obj.seek(0)
+        for line in lines:
+            if student_num_del.strip().upper() not in line:
+                file_obj.write(line)
+        file_obj.truncate()
 
 
 def user_selection(user_input: str):
-    """Determine user input to perform action.
-
-    PRECONDITION: user_input must be an int."""
+    """Determine user input to perform action."""
     if user_input == "1":
         add_student()
     elif user_input == "2":
