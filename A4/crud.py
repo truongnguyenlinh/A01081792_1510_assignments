@@ -108,9 +108,17 @@ def calc_average():
                 for grade in words_list[4:]:
                     student_total += int(grade)
                 class_avg_list.append(student_total/len(words_list[4:]))
-        print("The class average is " + str(sum(class_avg_list) / count) + ".\n")
+        print("The class average is " + str(round(sum(class_avg_list), 2) / count) + ".\n")
     except ZeroDivisionError:
         print("The class currently has no grades!")
+
+
+def print_class_list():
+    """Print all students in students.txt file."""
+    with open("students.txt", "r") as file_object:
+        file_list = file_object.readlines()
+        for line in file_list:
+            print(line, end="")
 
 
 def user_selection(user_input):
@@ -124,8 +132,7 @@ def user_selection(user_input):
     elif user_input == "3":
         calc_average()
     elif user_input == "4":
-        pass
-    # print class list
+        print_class_list()
     elif user_input == "5":
         quit()
     else:
