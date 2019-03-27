@@ -40,6 +40,3 @@ class Student:
 
     def get_final_grades(self):
         return self.final_grades
-
-    def return_info(self):
-        return self.first_name, self.last_name, self.id, self.status, self.final_grades
