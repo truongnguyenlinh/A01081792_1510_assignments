@@ -2,7 +2,9 @@ import student
 
 
 def obtain_standing():
-    """Confirm student's current standing."""
+    """Confirm student's current standing.
+
+    RETURN True if user input is Y, False if N"""
     input_standing = input("Is the student in good standing (Y/N)?")
     if input_standing.strip().upper() == "Y":
         return True
@@ -13,7 +15,9 @@ def obtain_standing():
 
 
 def obtain_grades(student_obj):
-    """Confirm if user would like to input final grades. Add to final grades list if so."""
+    """Confirm if user would like to input final grades. Add to final grades list if so.
+
+    PRECONDITION student_obj must be valid class from Student"""
     grades_input = ""
     while grades_input.strip().title() != "None":
         grades_input = input("Enter the student's final grade for a single course.\n"
@@ -24,22 +28,22 @@ def obtain_grades(student_obj):
 
 def add_student():
     """Obtain user input to generate a Student instance."""
-    first_name = input("Enter the student's first name.")
-    last_name = input("Enter the student's last name.")
-    student_num = input("Enter the student's id number.")
+    first_name = input("Enter the student's first name (must only be alphabetical characters).")
+    last_name = input("Enter the student's last name (must only be alphabetical characters).")
+    student_num = input("Enter the student's id number (must be of length 9 and begin with 'a').")
     try:
         student_instance = student.Student(first_name, last_name, student_num, obtain_standing())
         obtain_grades(student_instance)
         file_write(student_instance)
     except ValueError:
-        print("Incorrect value entered!")
+        print("An incorrect value was entered representing student first name, last name or student number!")
 
 
 def file_write(student_object):
     """Append student_object to the end of students.txt file.
 
     PARAM student_object must be an instance of class Student
-    RETURN True if student_object was successfully appended to file, False otherwise"""
+    RETURN True if student_object was successfully appended to file"""
     filename = "students.txt"
     # FileNotFoundError will never occur, as 'a' mode will always create a new file if not existing
     with open(filename, "a") as file_object:
@@ -51,7 +55,10 @@ def file_write(student_object):
 
 
 def file_delete_student(student_num):
-    """Determine if student was removed from text-file."""
+    """Determine if student was removed from text-file.
+
+    PRECONDITION student_num must be formatted as seen in Student ID attribute
+    RETURN True if student_num is not found on file, False otherwise"""
     file_object = open("students.txt", "r")
     file = file_object.read()
     file_object.close()
@@ -62,6 +69,9 @@ def file_delete_student(student_num):
 
 
 def exclude_student(student_num):
+    """Create new file excluding line with student_num.
+
+    PRECONDITION student_num must be formatted as seen in Student ID attribute"""
     with open("students.txt", "r+") as file_object:
         file = [line for line in file_object.readlines() if student_num not in line]
         file_object.seek(0)
@@ -82,15 +92,37 @@ def del_student():
             exclude_student(student_num)
 
 
+def calc_average():
+    """Calculate the average of all students in students.txt, excluding students with no grades."""
+    student_total = 0
+    count = 0
+    class_avg_list = []
+    with open("students.txt", "r") as file_object:
+        file = file_object.readlines()
+
+    try:
+        for line in file:
+            words_list = line.split()
+            if len(words_list) > 4:
+                count += 1
+                for grade in words_list[4:]:
+                    student_total += int(grade)
+                class_avg_list.append(student_total/len(words_list[4:]))
+        print("The class average is " + str(sum(class_avg_list) / count) + ".\n")
+    except ZeroDivisionError:
+        print("The class currently has no grades!")
+
+
 def user_selection(user_input):
-    """Determine user input to perform action."""
+    """Determine user input to perform action.
+
+    PRECONDITION user_input must be a string within range 1 to 5"""
     if user_input == "1":
         add_student()
     elif user_input == "2":
         del_student()
     elif user_input == "3":
-        pass
-    # calculate class average
+        calc_average()
     elif user_input == "4":
         pass
     # print class list
