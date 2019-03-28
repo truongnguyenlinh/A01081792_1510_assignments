@@ -12,6 +12,7 @@ def obtain_standing():
         return False
     else:
         print("Please enter one of the listed options by number!")
+        return obtain_standing()
 
 
 def obtain_grades(student_obj):
