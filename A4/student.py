@@ -40,19 +40,19 @@ class Student:
         if not new_l_name.isalpha():
             raise ValueError("New first name must be alphabet characters!")
         else:
-            self.__first_name = new_l_name.strip().title()
+            self.__last_name = new_l_name.strip().title()
 
-    def set_standing(self, new_standing):
+    def set_standing(self, new_standing: bool):
         if type(new_standing) != bool:
             raise ValueError("Standing must be True or False!")
         else:
             self.__status = new_standing
 
-    def set_grades(self, grade):
-        if type(grade) == str:
+    def set_grades(self, new_grade: int):
+        if type(new_grade) == str:
             raise TypeError("Grade must be an integer!")
         else:
-            self.get_final_grades().append(grade)
+            self.__final_grades.append(new_grade)
 
     def __str__(self):
         return self.__last_name + " " + self.__first_name + " " + self.__id + " " + str(self.__status) \
