@@ -2,13 +2,13 @@ class Student:
 
     def __init__(self, f_name: str, l_name: str, student_num: str, status: bool, grades: list):
         if not (f_name.isalpha() and l_name.isalpha()):
-            raise ValueError("Please enter a first and last name with alphabetic characters!")
+            raise ValueError("Please enter a first and last name with alphabetic characters only!")
         else:
             self.__first_name = f_name.strip().title()
             self.__last_name = l_name.strip().title()
 
         if not (student_num[0].upper() == "A" and student_num[1:].isdigit() and len(student_num) == 9):
-            raise ValueError("Please enter a student number beginning in 'A' followed by 8 digits.")
+            raise ValueError("Please enter a student number beginning with 'A', followed by 8 digits.")
         else:
             self.__id = student_num.upper()
 
@@ -39,13 +39,13 @@ class Student:
 
     def set_f_name(self, new_f_name: str):
         if not new_f_name.isalpha():
-            raise ValueError("New first name must be alphabet characters!")
+            raise ValueError("New first name must consist of alphabet characters!")
         else:
             self.__first_name = new_f_name.strip().title()
 
     def set_l_name(self, new_l_name: str):
         if not new_l_name.isalpha():
-            raise ValueError("New first name must be alphabet characters!")
+            raise ValueError("New first name must consist of alphabet characters!")
         else:
             self.__last_name = new_l_name.strip().title()
 
