@@ -15,32 +15,33 @@ def obtain_standing():
         return obtain_standing()
 
 
-def obtain_grades(student_obj):
+def obtain_grades():
     """Confirm if user would like to input final grades. Add to final grades list if so.
 
     PRECONDITION student_obj must be valid class from Student"""
+    final_grades = []
     grades_input = ""
     while grades_input.strip().title() != "None":
         grades_input = input("Enter the student's final grade for a single course.\n"
                              "Otherwise, type 'None'.\n")
         if grades_input.strip().isdigit():
-            student_obj.append_grades(int(grades_input))
+            final_grades.append(int(grades_input))
+    return final_grades
 
 
 def add_student():
     """Obtain user input to generate a Student instance."""
     first_name = input("Enter the student's first name (must only be alphabetical characters).")
     last_name = input("Enter the student's last name (must only be alphabetical characters).")
-    student_num = input("Enter the student's id number (must be of length 9 and begin with 'a').")
+    student_num = input("Enter the student's id number in the following format, where 'X' is a number: AXXXXXXXX.")
     try:
-        student_instance = student.Student(first_name, last_name, student_num, obtain_standing())
-        obtain_grades(student_instance)
+        student_instance = student.Student(first_name, last_name, student_num, obtain_standing(), obtain_grades())
         file_write(student_instance)
-    except ValueError:
-        print("An incorrect value was entered representing student first name, last name or student number!")
+    except ValueError as e:
+        print(e)
 
 
-def file_write(student_object):
+def file_write(student_object: object):
     """Append student_object to the end of students.txt file.
 
     PARAM student_object must be an instance of class Student
@@ -48,14 +49,12 @@ def file_write(student_object):
     filename = "students.txt"
     # FileNotFoundError will never occur, as 'a' mode will always create a new file if not existing
     with open(filename, "a") as file_object:
-        file_object.write("%s %s %s %s %s" % (student_object.get_f_name(), student_object.get_l_name(),
-                                              student_object.get_id(), student_object.get_standing(),
-                                              student_object.string_grades()))
+        file_object.write(student_object.__str__())
         file_object.write("\n")
     return True
 
 
-def file_delete_student(student_num):
+def file_delete_student(student_num: str):
     """Determine if student was removed from text-file.
 
     PRECONDITION student_num must be formatted as seen in Student ID attribute
@@ -69,7 +68,7 @@ def file_delete_student(student_num):
         return False
 
 
-def exclude_student(student_num):
+def exclude_student(student_num: str):
     """Create new file excluding line with student_num.
 
     PRECONDITION student_num must be formatted as seen in Student ID attribute"""
@@ -118,11 +117,12 @@ def print_class_list():
     """Print all students in students.txt file."""
     with open("students.txt", "r") as file_object:
         file_list = file_object.readlines()
+        file_list.sort()
         for line in file_list:
             print(line, end="")
 
 
-def user_selection(user_input):
+def user_selection(user_input: str):
     """Determine user input to perform action.
 
     PRECONDITION user_input must be a string within range 1 to 5"""
