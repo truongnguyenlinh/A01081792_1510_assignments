@@ -1,6 +1,6 @@
 class Student:
 
-    def __init__(self, f_name: str, l_name: str, student_num: str, status: bool, grades: list):
+    def __init__(self, f_name: str, l_name: str, student_num: str, status: bool):
         if not (f_name.isalpha() and l_name.isalpha()):
             raise ValueError("Please enter a first and last name with alphabetic characters only!")
         else:
@@ -16,11 +16,7 @@ class Student:
             raise TypeError("Please pass True or False!")
         else:
             self.__status = status
-
-        if type(grades) != list:
-            raise TypeError
-        else:
-            self.__final_grades = grades
+        self.__final_grades = []
 
     def get_f_name(self):
         return self.__first_name
@@ -54,6 +50,12 @@ class Student:
             raise ValueError("Standing must be True or False!")
         else:
             self.__status = new_standing
+
+    def update_grades(self, new_grade: int):
+        if not (100 > new_grade > 0):
+            raise ValueError("Please enter final grade(s) between 0 and 100 percent.")
+        else:
+            self.__final_grades.append(new_grade)
 
     def __str__(self):
         return self.__last_name + " " + self.__first_name + " " + self.__id + " " + str(self.__status) \

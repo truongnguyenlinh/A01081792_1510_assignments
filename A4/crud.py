@@ -1,4 +1,4 @@
-import student
+from student import Student
 
 
 def obtain_standing():
@@ -15,18 +15,30 @@ def obtain_standing():
         return obtain_standing()
 
 
-def obtain_grades():
+def obtain_grades(student: Student):
     """Confirm if user would like to input final grades. Add to final grades list if so.
 
     PRECONDITION student_obj must be valid class from Student"""
-    final_grades = []
     grades_input = ""
     while grades_input.strip().title() != "None":
-        grades_input = input("Enter the student's final grade for a single course.\n"
-                             "Otherwise, type 'None'.\n")
-        if grades_input.strip().isdigit():
-            final_grades.append(int(grades_input))
-    return final_grades
+        grades_input = input("Enter the student's final grade for a single course. Otherwise, type 'None'.\n")
+        try:
+            if grades_input.strip().isdigit():
+                student.update_grades(int(grades_input))
+        except ValueError as e:
+            print(e)
+
+
+def confirm_unique(id_num: str):
+    """Confirm if student number entered is unique.
+
+    PRECONDITION id_num must be same format seen in Student class"""
+    if id_num.strip().upper() in open("students.txt").read():
+        print("Please enter a unique student number!")
+        id_num = input("Enter the student's id number in the following format, where 'X' is a number: AXXXXXXXX.")
+        return confirm_unique(id_num)
+    else:
+        return id_num
 
 
 def add_student():
@@ -35,13 +47,14 @@ def add_student():
     last_name = input("Enter the student's last name (must only be alphabetical characters).")
     student_num = input("Enter the student's id number in the following format, where 'X' is a number: AXXXXXXXX.")
     try:
-        student_instance = student.Student(first_name, last_name, student_num, obtain_standing(), obtain_grades())
+        student_instance = Student(first_name, last_name, confirm_unique(student_num), obtain_standing())
+        obtain_grades(student_instance)
         file_write(student_instance)
     except ValueError as e:
         print(e)
 
 
-def file_write(student_object: object):
+def file_write(student_object: Student):
     """Append student_object to the end of students.txt file.
 
     PARAM student_object must be an instance of class Student

@@ -5,8 +5,9 @@ from student import Student
 class TestStudent(TestCase):
 
     def setUp(self):
-        self.test_student = Student("chris", "thompson", "a00000000", True, [78, 89, 87])
-        self.test_student_1 = Student("ANGUS", "MUNDY", "A09987654", False, [32, 65, 89, 91])
+        self.test_student = Student("chris", "thompson", "a00000000", True)
+        self.test_student_1 = Student("ANGUS", "MUNDY", "A09987654", False)
+        # self.test_student_2_incorrect = Student("H3LEN", "NG73N", "G", False)
 
     def test_get_f_name(self):
         expected = "Chris"
@@ -29,7 +30,7 @@ class TestStudent(TestCase):
         self.assertEqual(expected, actual)
 
     def test_get_final_grades(self):
-        expected = [32, 65, 89, 91]
+        expected = []
         actual = self.test_student_1.get_final_grades()
         self.assertEqual(expected, actual)
 
