@@ -42,8 +42,7 @@ class TestStudent(TestCase):
         actual = self.test_student.get_f_name()
         self.assertEqual(expected, actual)
 
-    @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
-    def test_set_f_name_error(self, mock_stdout):
+    def test_set_f_name_error(self,):
         with self.assertRaises(ValueError):
             self.test_student.set_f_name("weh844")
 
@@ -53,8 +52,7 @@ class TestStudent(TestCase):
         actual = self.test_student.get_l_name()
         self.assertEqual(expected, actual)
 
-    @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
-    def test_set_l_name_error(self, mock_stdout):
+    def test_set_l_name_error(self):
         with self.assertRaises(ValueError):
             self.test_student.set_l_name("Nguy3n")
 
@@ -64,8 +62,7 @@ class TestStudent(TestCase):
         actual = self.test_student_1.get_standing()
         self.assertEqual(expected, actual)
 
-    @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
-    def test_update_grades_error(self, mock_stdout):
+    def test_update_grades_error(self):
         with self.assertRaises(ValueError):
             self.test_student_1.update_grades(1001)
 
