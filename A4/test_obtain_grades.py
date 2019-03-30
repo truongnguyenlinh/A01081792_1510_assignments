@@ -2,8 +2,6 @@ from unittest import TestCase
 from crud import obtain_grades
 from student import Student
 from unittest.mock import patch
-import unittest
-import io
 
 
 class TestObtainGrades(TestCase):

@@ -33,11 +33,14 @@ def confirm_unique(id_num: str):
     """Confirm if student number entered is unique.
 
     PRECONDITION id_num must be same format seen in Student class"""
-    if id_num.strip().upper() in open("students.txt").read():
-        print("Please enter a unique student number!")
-        id_num = input("Enter the student's id number in the following format, where 'X' is a number: AXXXXXXXX.")
-        return confirm_unique(id_num)
-    else:
+    try:
+        if id_num.strip().upper() in open("students.txt").read():
+            print("Please enter a unique student number!")
+            id_num = input("Enter the student's id number in the following format, where 'X' is a number: AXXXXXXXX.")
+            return confirm_unique(id_num)
+        else:
+            return id_num
+    except FileNotFoundError:
         return id_num
 
 
