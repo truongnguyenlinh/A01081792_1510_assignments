@@ -1,5 +1,8 @@
 from unittest import TestCase
 from student import Student
+import unittest
+from unittest import mock
+import io
 
 
 class TestStudent(TestCase):
@@ -40,14 +43,35 @@ class TestStudent(TestCase):
         actual = self.test_student.get_f_name()
         self.assertEqual(expected, actual)
 
+    @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
+    def test_set_f_name_error(self, mock_stdout):
+        with self.assertRaises(ValueError):
+            self.test_student.set_f_name("weh844")
+
     def test_set_l_name(self):
         expected = "Welp"
         self.test_student.set_l_name("welp")
         actual = self.test_student.get_l_name()
         self.assertEqual(expected, actual)
 
+    @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
+    def test_set_l_name_error(self, mock_stdout):
+        with self.assertRaises(ValueError):
+            self.test_student.set_l_name("Nguy3n")
+
     def test_set_standing(self):
         expected = True
         self.test_student_1.set_standing(True)
         actual = self.test_student_1.get_standing()
+        self.assertEqual(expected, actual)
+
+    @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
+    def test_update_grades_error(self, mock_stdout):
+        with self.assertRaises(ValueError):
+            self.test_student_1.update_grades(1001)
+
+    def test_update_grades(self):
+        expected = [78]
+        actual = self.test_student_1.get_final_grades()
+        self.test_student_1.update_grades(78)
         self.assertEqual(expected, actual)
