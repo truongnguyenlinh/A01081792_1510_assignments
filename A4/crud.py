@@ -158,10 +158,12 @@ def user_selection(user_input: str):
 
 def main():
     while True:
-        print("1. Add student\n2. Delete student\n3. Calculate class average\n4. Print class list\n5. Quit\n")
-        action_input = input("Enter a menu number that represents your desired action:\n")
-        user_selection(action_input)
-
+        try:
+            print("1. Add student\n2. Delete student\n3. Calculate class average\n4. Print class list\n5. Quit\n")
+            action_input = input("Enter a menu number that represents your desired action:\n")
+            user_selection(action_input)
+        except FileNotFoundError:
+            print("There are currently no students on file!")
 
 if __name__ == '__main__':
     main()

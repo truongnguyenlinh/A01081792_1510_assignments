@@ -19,4 +19,3 @@ class TestCalcAverage(TestCase):
         expected = "The class currently has no grades!\n"
         calc_average()
         self.assertEqual(mock_stdout.getvalue(), expected)
-
