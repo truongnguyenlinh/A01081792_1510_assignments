@@ -59,4 +59,4 @@ class Student:
 
     def __str__(self):
         return self.__last_name + " " + self.__first_name + " " + self.__id + " " + str(self.__status) \
-               + " " + " ".join(str(grade) for grade in self.__final_grades)
+               + " " + " ".join(str(grade) for grade in self.get_final_grades())
