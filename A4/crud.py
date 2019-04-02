@@ -99,13 +99,15 @@ def exclude_student(student_num: str):
 def del_student():
     """Delete a Student from students.txt given their student number."""
     student_num = input("Enter the student number you would like to remove.")
-    student_num = student_num.upper()
-    with open("students.txt", "r"):
-        if file_delete_student(student_num):
-            print("This student is no longer on file.")
-        else:
-            print("Deleted!")
-            exclude_student(student_num)
+    if not (len(student_num.upper()) == 9 and student_num[1:].isdigit() and student_num.upper()[0] == "A"):
+        print("Please enter a student number beginning with 'A', followed by 8 digits.")
+    else:
+        with open("students.txt", "r"):
+            if file_delete_student(student_num):
+                print("This student is no longer on file.")
+            else:
+                print("Deleted!")
+                exclude_student(student_num)
 
 
 def calc_average():
@@ -164,6 +166,7 @@ def main():
             user_selection(action_input)
         except FileNotFoundError:
             print("There are currently no students on file!")
+
 
 if __name__ == '__main__':
     main()
