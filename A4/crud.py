@@ -1,7 +1,7 @@
 from student import Student
 
 
-def obtain_standing():
+def obtain_standing() -> bool:
     """Confirm student's current standing.
 
     RETURN True if user input is Y, False if N"""
@@ -25,22 +25,21 @@ def obtain_grades(student: Student):
         try:
             if grades_input.strip().isdigit():
                 student.update_grades(int(grades_input))
+            else:
+                print("Please enter grades from 0-100!")
         except ValueError as e:
             print(e)
 
 
-def confirm_unique(id_num: str):
+def confirm_unique(id_num: str) -> str:
     """Confirm if student number entered is unique.
 
     PRECONDITION id_num must be same format seen in Student class"""
-    try:
-        if id_num.strip().upper() in open("students.txt").read():
-            print("Please enter a unique student number!")
-            id_num = input("Enter the student's id number in the following format, where 'X' is a number: AXXXXXXXX.")
-            return confirm_unique(id_num)
-        else:
-            return id_num
-    except FileNotFoundError:
+    if id_num.strip().upper() in open("students.txt").read():
+        print("Please enter a unique student number!")
+        id_num = input("Enter the student's id number in the following format, where 'X' is a number: AXXXXXXXX.")
+        return confirm_unique(id_num)
+    else:
         return id_num
 
 
@@ -55,6 +54,19 @@ def add_student():
         file_write(student_instance)
     except ValueError as e:
         print(e)
+
+
+def file_read() -> list:
+    """Read students.txt and convert every student back to Student class."""
+    list_of_students = []
+    with open("students.txt", "r") as file_object:
+        file = file_object.readlines()
+    for line in file:
+        student_text = line.split()
+        student_instance = Student(student_text[1], student_text[0], student_text[2], bool(student_text[3]),
+                                   [int(grade) for grade in student_text[4:]])
+        list_of_students.append(student_instance)
+    return list_of_students
 
 
 def file_write(student_object: Student):
@@ -112,32 +124,25 @@ def del_student():
 
 def calc_average():
     """Calculate the average of all students in students.txt, excluding students with no grades."""
-    student_total = 0
+    students_list = file_read()
     count = 0
-    class_avg_list = []
-    with open("students.txt", "r") as file_object:
-        file = file_object.readlines()
-
+    class_avg = []
     try:
-        for line in file:
-            words_list = line.split()
-            if len(words_list) > 4:
+        for student in students_list:
+            if len(student.get_final_grades()) != 0:
                 count += 1
-                for grade in words_list[4:]:
-                    student_total += int(grade)
-                class_avg_list.append(student_total/len(words_list[4:]))
-        print("The class average is " + str(round(sum(class_avg_list), 2) / count) + ".\n")
+                class_avg.append(student.get_gpa())
+        print("The class average is " + str(round(sum(class_avg), 2) / count) + ".\n")
     except ZeroDivisionError:
         print("The class currently has no grades!")
 
 
 def print_class_list():
     """Print all students in students.txt file."""
-    with open("students.txt", "r") as file_object:
-        file_list = file_object.readlines()
-        file_list.sort()
-        for line in file_list:
-            print(line, end="")
+    students_list = file_read()
+    sorted_students = sorted(students_list, key=lambda student: student.get_f_name())
+    for students in sorted_students:
+        print(students)
 
 
 def user_selection(user_input: str):
