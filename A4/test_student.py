@@ -71,3 +71,7 @@ class TestStudent(TestCase):
         actual = self.test_student_1.get_final_grades()
         self.test_student_1.update_grades(78)
         self.assertEqual(expected, actual)
+
+    def test_get_gpa(self):
+        with self.assertRaises(ZeroDivisionError):
+            self.test_student.get_gpa()
