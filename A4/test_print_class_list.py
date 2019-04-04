@@ -22,3 +22,8 @@ class TestPrintClassList(TestCase):
                    "Linh Truong A01081792 True \n"
         print_class_list()
         self.assertEqual(mock_stdout.getvalue(), expected)
+
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_print_class_error(self, mock_stdout):
+        with self.assertRaises(FileNotFoundError):
+            print_class_list()

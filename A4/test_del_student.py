@@ -28,3 +28,9 @@ class TestDelStudent(TestCase):
         expected = "Please enter a student number beginning with 'A', followed by 8 digits.\n"
         del_student()
         self.assertEqual(mock_stdout.getvalue(), expected)
+
+    @patch('sys.stdout', new_callable=io.StringIO)
+    @patch('builtins.input', side_effect=["A03921845"])
+    def test_del_student_error(self, mock_user_input, mock_stdout):
+        with self.assertRaises(FileNotFoundError):
+            del_student()

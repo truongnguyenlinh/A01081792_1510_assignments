@@ -50,6 +50,7 @@ def add_student():
         student_instance = Student(first_name, last_name, confirm_unique(student_num), obtain_standing())
         obtain_grades(student_instance)
         file_write(student_instance)
+        return True
     except ValueError as e:
         print(e)
 
