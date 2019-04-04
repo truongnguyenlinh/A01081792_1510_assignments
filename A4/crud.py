@@ -25,8 +25,6 @@ def obtain_grades(student: Student):
         try:
             if grades_input.strip().isdigit():
                 student.update_grades(int(grades_input))
-            else:
-                print("Please enter grades from 0-100!")
         except ValueError as e:
             print(e)
 
@@ -63,7 +61,7 @@ def file_read() -> list:
         file = file_object.readlines()
     for line in file:
         student_text = line.split()
-        student_instance = Student(student_text[1], student_text[0], student_text[2], bool(student_text[3]))
+        student_instance = Student(student_text[0], student_text[1], student_text[2], bool(student_text[3]))
         for grade in student_text[4:]:
             student_instance.update_grades(int(grade))
         list_of_students.append(student_instance)
@@ -97,30 +95,33 @@ def file_delete_student(student_num: str):
         return False
 
 
-def exclude_student(student_num: str):
+def exclude_student(stud_list: list):
     """Create new file excluding line with student_num.
 
-    PRECONDITION student_num must be formatted as seen in Student ID attribute"""
+    PRECONDITION student_list must be list of Student objects"""
     with open("students.txt", "r+") as file_object:
-        file = [line for line in file_object.readlines() if student_num not in line]
-        file_object.seek(0)
-        for line in file:
-            file_object.write(line)
+        for student in stud_list:
+            file_object.write(student.__str__())
+            file_object.write("\n")
         file_object.truncate()
 
 
 def del_student():
     """Delete a Student from students.txt given their student number."""
     student_num = input("Enter the student number you would like to remove.")
+    student_num = student_num.strip().title()
+
     if not (len(student_num.upper()) == 9 and student_num[1:].isdigit() and student_num.upper()[0] == "A"):
         print("Please enter a student number beginning with 'A', followed by 8 digits.")
+    elif file_delete_student(student_num):
+        print("This student is no longer on file.")
     else:
-        with open("students.txt", "r"):
-            if file_delete_student(student_num):
-                print("This student is no longer on file.")
-            else:
-                print("Deleted!")
-                exclude_student(student_num)
+        student_list = file_read()
+        for student in student_list:
+            if student.get_id() == student_num:
+                student_list.remove(student)
+        print("Deleted!")
+        exclude_student(student_list)
 
 
 def calc_average():
@@ -133,7 +134,7 @@ def calc_average():
             if len(student.get_final_grades()) != 0:
                 count += 1
                 class_avg.append(student.get_gpa())
-        print("The class average is " + str(round(sum(class_avg), 2) / count) + ".\n")
+        print("The class average is " + str(round((sum(class_avg) / count), 2)) + ".\n")
     except ZeroDivisionError:
         print("The class currently has no grades!")
 

@@ -80,3 +80,7 @@ class Student:
         FirstName LastName A######## True 90 80 76 100 62 42"""
         return self.__first_name + " " + self.__last_name + " " + self.__id + " " + str(self.__status) + " " \
                + " ".join(str(grade) for grade in self.get_final_grades())
+
+    def __repr__(self):
+        return self.__first_name + " " + self.__last_name + " " + self.__id + " " + str(self.__status) + " " \
+               + " ".join(str(grade) for grade in self.get_final_grades())

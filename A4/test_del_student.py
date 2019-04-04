@@ -14,9 +14,17 @@ class TestDelStudent(TestCase):
         self.assertEqual(mock_stdout.getvalue(), expected)
 
     @patch('sys.stdout', new_callable=io.StringIO)
-    @patch('builtins.open', new_callable=mock_open, read_data="Truong Linh A01081792 False")
+    @patch('builtins.open', new_callable=mock_open, read_data="Linh Truong A01081792 False")
     @patch('builtins.input', side_effect=["A01081792"])
     def test_del_student_deleted(self, mock_user_input, mock_file, mock_stdout):
         expected = "Deleted!\n"
+        del_student()
+        self.assertEqual(mock_stdout.getvalue(), expected)
+
+    @patch('sys.stdout', new_callable=io.StringIO)
+    @patch('builtins.open', new_callable=mock_open, read_data="Linh Truong A01081792 True 78 90")
+    @patch('builtins.input', side_effect=["EHGAWEGAWEG"])
+    def test_del_student_deleted(self, mock_user_input, mock_file, mock_stdout):
+        expected = "Please enter a student number beginning with 'A', followed by 8 digits.\n"
         del_student()
         self.assertEqual(mock_stdout.getvalue(), expected)
