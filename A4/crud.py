@@ -61,7 +61,7 @@ def file_read() -> list:
         file = file_object.readlines()
     for line in file:
         student_text = line.split()
-        student_instance = Student(student_text[0], student_text[1], student_text[2], bool(student_text[3]))
+        student_instance = Student(student_text[0], student_text[1], student_text[2], eval(student_text[3]))
         for grade in student_text[4:]:
             student_instance.update_grades(int(grade))
         list_of_students.append(student_instance)
