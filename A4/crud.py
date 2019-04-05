@@ -53,7 +53,7 @@ def add_student():
         student_instance = Student(first_name, last_name, confirm_unique(student_num), obtain_standing())
         obtain_grades(student_instance)
         file_write(student_instance)
-        print("Student was added successfully!")
+        print("\nStudent was added successfully!\n")
         return True
     except ValueError as e:
         print(e)
@@ -81,8 +81,7 @@ def file_write(student_object: Student):
     filename = "students.txt"
     # FileNotFoundError will never occur, as 'a' mode will always create a new file if not existing
     with open(filename, "a") as file_object:
-        file_object.write(student_object.__str__())
-        file_object.write("\n")
+        file_object.write(student_object.__str__() + "\n")
     return True
 
 
@@ -175,6 +174,7 @@ def main():
         try:
             print("1. Add student\n2. Delete student\n3. Calculate class average\n4. Print class list\n5. Quit\n")
             action_input = input("Enter a menu number that represents your desired action:\n")
+            action_input.strip()
             user_selection(action_input)
         except FileNotFoundError:
             print("There are currently no students on file!")
