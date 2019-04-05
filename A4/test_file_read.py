@@ -42,3 +42,8 @@ class TestFileRead(TestCase):
     def test_file_read_len(self, mock_file):
         actual = file_read()
         self.assertEqual(len(actual), 2)
+
+    @patch("builtins.open", new_callable=mock_open, read_data="Remy Truong A00000000 True 63")
+    def test_file_read_values(self, mock_file):
+        student_list = file_read()
+        self.assertEqual(student_list[0].__str__(), "Remy Truong A00000000 True 63")

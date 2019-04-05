@@ -105,8 +105,7 @@ def exclude_student(stud_list: list):
     PRECONDITION student_list must be list of Student objects"""
     with open("students.txt", "r+") as file_object:
         for student in stud_list:
-            file_object.write(student.__str__())
-            file_object.write("\n")
+            file_object.write(student.__str__() + "\n")
         file_object.truncate()
 
 
