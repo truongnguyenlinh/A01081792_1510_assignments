@@ -33,11 +33,14 @@ def confirm_unique(id_num: str) -> str:
     """Confirm if student number entered is unique.
 
     PRECONDITION id_num must be same format seen in Student class"""
-    if id_num.strip().upper() in open("students.txt").read():
-        print("Please enter a unique student number!")
-        id_num = input("Enter the student's id number in the following format, where 'X' is a number: AXXXXXXXX.")
-        return confirm_unique(id_num)
-    else:
+    try:
+        if id_num.strip().upper() in open("students.txt").read():
+            print("Please enter a unique student number!")
+            id_num = input("Enter the student's id number in the following format, where 'X' is a number: AXXXXXXXX.")
+            return confirm_unique(id_num)
+        else:
+            return id_num
+    except FileNotFoundError:
         return id_num
 
 
@@ -50,6 +53,7 @@ def add_student():
         student_instance = Student(first_name, last_name, confirm_unique(student_num), obtain_standing())
         obtain_grades(student_instance)
         file_write(student_instance)
+        print("Student was added successfully!")
         return True
     except ValueError as e:
         print(e)
@@ -135,7 +139,7 @@ def calc_average():
             if len(student.get_final_grades()) != 0:
                 count += 1
                 class_avg.append(student.get_gpa())
-        print("The class average is " + str(round((sum(class_avg) / count), 2)) + ".\n")
+        print("The class average is " + str(round((sum(class_avg) / count), 2)) + "%.\n")
     except ZeroDivisionError:
         print("The class currently has no grades!")
 
