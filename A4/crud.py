@@ -18,7 +18,7 @@ def obtain_standing() -> bool:
 def obtain_grades(student: Student):
     """Confirm if user would like to input final grades. Add to final grades list if so.
 
-    PRECONDITION student_obj must be valid class from Student"""
+    PRECONDITION student must be valid class from Student"""
     grades_input = ""
     while grades_input.strip().title() != "None":
         grades_input = input("Enter the student's final grade for a single course. Otherwise, type 'None'.\n")
@@ -60,7 +60,9 @@ def add_student():
 
 
 def file_read() -> list:
-    """Read students.txt and convert every student back to Student class."""
+    """Read students.txt and convert every student back to Student class.
+
+    RETURN a list of Student objects"""
     list_of_students = []
     with open("students.txt", "r") as file_object:
         file = file_object.readlines()
@@ -73,7 +75,7 @@ def file_read() -> list:
     return list_of_students
 
 
-def file_write(student_object: Student):
+def file_write(student_object: Student) -> bool:
     """Append student_object to the end of students.txt file.
 
     PARAM student_object must be an instance of class Student
@@ -85,7 +87,7 @@ def file_write(student_object: Student):
     return True
 
 
-def file_delete_student(student_num: str):
+def file_delete_student(student_num: str) -> bool:
     """Determine if student was removed from text-file.
 
     PRECONDITION student_num must be formatted as seen in Student ID attribute

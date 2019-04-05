@@ -9,7 +9,7 @@ class TestCalcAverage(TestCase):
                                                               "Jason Zhou A00000000 True")
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_calc_average(self, mock_stdout, mock_open):
-        expected = "The class average is 75.33.\n\n"
+        expected = "The class average is 75.33%.\n\n"
         calc_average()
         self.assertEqual(mock_stdout.getvalue(), expected)
 
