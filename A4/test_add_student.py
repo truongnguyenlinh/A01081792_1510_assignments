@@ -22,19 +22,18 @@ class TestAddStudent(TestCase):
         self.assertEqual(mock_stdout.getvalue(), "\nStudent was added successfully!\n\n")
 
     @patch("builtins.open", new_callable=mock_open, read_data="Linh Truong A01081702 True 78")
-    def test_file_read_include_student_match_values(self, mock_file):
+    def test_file_read_values(self, mock_file):
         student_list = file_read()
         self.assertEqual(student_list[0].__str__(), "Linh Truong A01081702 True 78")
 
     @patch("builtins.open", new_callable=mock_open)
-    def test_file_read_include_student_empty_list(self, mock_file):
+    def test_file_read_include_type(self, mock_file):
         student_list = file_read()
         self.assertEqual(type(student_list), list)
 
     @patch("builtins.open", new_callable=mock_open)
     @patch("builtins.input", side_effect=["Linh", "Truong", "A01081792", "Y", "90", "None"])
     def test_file_write_student_called_once(self, mock_input, mock_file):
-        output = "\nStudent was added successfully!\n\n"
         student_instance = Student("Linh", "Truong", "A01081792", True)
         student_instance.update_grades(90)
         value = file_write(student_instance)
