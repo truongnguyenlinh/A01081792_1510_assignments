@@ -10,7 +10,9 @@ def gcd(a: int, b: int) -> int:
     >>> gcd(2, 4)
     2
     >>> gcd(10, 189)
-    1"""
+    1
+    >>> gcd(56, 0)
+    56"""
     if a == 0:
         raise ValueError("Please enter a non-zero integer!")
     else:
