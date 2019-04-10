@@ -5,27 +5,27 @@ def gcd(a: int, b: int) -> int:
     """Return the greatest common divisor of a and b.
 
     RETURN the largest number that divides cleanly between a and b
-    >>> gcd(1, 7)
-    1
-    >>> gcd(2, 4)
-    2
+    >>> gcd(0, 0)
+    0
+    >>> gcd(0, 4)
+    4
     >>> gcd(10, 189)
     1
     >>> gcd(56, 0)
     56"""
-    if a == 0:
-        raise ValueError("Please enter a non-zero integer!")
+    try:
+        a % b
+    except ZeroDivisionError:
+        return a
     else:
-        if b == 0:
-            return a
+        if a % b == 0:
+            return b
         else:
             return gcd(b, a % b)
 
 
 def main():
     doctest.testmod()
-    print(gcd(8, 7))
-    print(gcd(2, 0))
 
 
 if __name__ == '__main__':
