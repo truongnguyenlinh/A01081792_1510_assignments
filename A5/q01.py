@@ -1,8 +1,20 @@
+import doctest
+
+
 def sum_of_primes(upperbound: int):
     """Return the sum of probes between 0 and upper bound as an integer.
 
     PRECONDITION upperbound is a positive integer
-    RETURN the sum of all prime numbers including upperbound"""
+    RETURN the sum of all prime numbers including upperbound
+    >>> sum_of_primes(10)
+    17
+    >>> sum_of_primes(5)
+    10
+    >>> sum_of_primes(0)
+    0
+    >>> sum_of_primes(1000)
+    76127
+    """
     not_primes = []
     prime = []
     if upperbound < 0:
@@ -17,6 +29,7 @@ def sum_of_primes(upperbound: int):
 
 
 def main():
+    doctest.testmod()
     print(sum_of_primes(11))
     print(sum_of_primes(100))
 
