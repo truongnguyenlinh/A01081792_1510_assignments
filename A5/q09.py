@@ -4,9 +4,9 @@ import doctest
 def base_conversion(org_num: int, org_base: int, dest_base: int) -> int:
     """Convert a decimal number to a 4-digit number in a different base within {0,9}.
 
-    PRECONDITION org_base must be a base number from 1-10
+    PRECONDITION org_base must be a base number from 2-10
     PRECONDITION org_num must be a positive integer
-    PRECONDITION dest_base must be a base number from 1-10
+    PRECONDITION dest_base must be a base number from 2-10
     RETURN the new value as an integer
     >>> base_conversion(23, 4, 7)
     14
@@ -20,7 +20,7 @@ def base_conversion(org_num: int, org_base: int, dest_base: int) -> int:
         while dec_num > 0:
             result += str(dec_num % dest_base)
             dec_num //= dest_base
-        return int(result[::-1])
+        return int(result[::-1]) if result != '' else 0
     except ValueError:
         print("The number entered is cannot be converted!")
 
