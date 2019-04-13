@@ -1,6 +1,18 @@
+import doctest
+
+
 def cashmoney(double: float):
-    """Determines the fewest of each bill and coin from given float."""
-    cash_dict = {100: 0, 50: 0, 20: 0, 10: 0, 5: 0, 2: 0, 1: 0, 0.25: 0, 0.10: 0, 0.05: 0, 0.01: 3}
+    """Determines the fewest of each bill and coin from given float.
+
+    PRECONDITION double is a positive float
+    >>> cashmoney(66.53)
+    {100: 0, 50: 1.0, 20: 0, 10: 1.0, 5: 1.0, 2: 0, 1: 1.0, 0.25: 2.0, 0.1: 0, 0.05: 0, 0.01: 3.0}
+    >>> cashmoney(0.0)
+    {100: 0, 50: 0, 20: 0, 10: 0, 5: 0, 2: 0, 1: 0, 0.25: 0, 0.1: 0, 0.05: 0, 0.01: 0}
+    >>> cashmoney(27)
+    {100: 0, 50: 0, 20: 1, 10: 0, 5: 1, 2: 1, 1: 0, 0.25: 0, 0.1: 0, 0.05: 0, 0.01: 0}
+    """
+    cash_dict = {100: 0, 50: 0, 20: 0, 10: 0, 5: 0, 2: 0, 1: 0, 0.25: 0, 0.10: 0, 0.05: 0, 0.01: 0}
     for i in cash_dict.keys():
         if double // i != 0:
             cash_dict[i] = double // i
@@ -9,7 +21,7 @@ def cashmoney(double: float):
 
 
 def main():
-    print(cashmoney(66.53))
+    doctest.testmod()
 
 
 if __name__ == '__main__':

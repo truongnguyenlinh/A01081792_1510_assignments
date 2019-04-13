@@ -1,9 +1,16 @@
+import doctest
+
+
 def selection_sort(unsorted: list):
     """Return a sorted copy of sortable_items.
 
     PRECONDITION sortable_items must be a non-empty list
     PRECONDITION elements in sortable items must be of the same type
-    RETURN sorted copy"""
+    RETURN sorted copy
+    >>> selection_sort([1, 8, 9, 2])
+    [1, 2, 8, 9]
+    >>> selection_sort(["z", "d", "a", "g"])
+    ['a', 'd', 'g', 'z']"""
     if len(unsorted) <= 0:
         raise ValueError("Please enter a list that is non-empty.")
 
@@ -20,8 +27,7 @@ def selection_sort(unsorted: list):
 
 
 def main():
-    print(selection_sort([5, 7, 1, 2]))
-    print(selection_sort(["z", "d", "a", "g"]))
+    doctest.testmod()
 
 
 if __name__== '__main__':
