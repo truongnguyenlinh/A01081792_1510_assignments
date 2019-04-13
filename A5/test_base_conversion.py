@@ -23,11 +23,6 @@ class TestBaseConversion(TestCase):
     def test_base_conversion_high_low(self):
         self.assertEqual(base_conversion(1234, 9, 2), 1110011010)
 
-    @patch('sys.stdout', new_callable=io.StringIO)
-    def test_base_conversion_zero_error(self, mock_stdout):
-        base_conversion(0, 0, 0)
-        self.assertEqual(mock_stdout.getvalue(), "The number entered is cannot be converted!\n")
-
     def test_base_conversion_zero_same(self):
         self.assertEqual(base_conversion(0, 10, 10), 0)
 
